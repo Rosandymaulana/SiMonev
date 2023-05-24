@@ -57,13 +57,6 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('peta_usulan') }}">
-          <i class="bi bi-map"></i>
-          <span>Peta Usulan</span>
-        </a>
-      </li>
-
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -86,12 +79,14 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('style/js/main.js') }}"></script>
 
+  {{-- Data Table --}}
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
   <script>
     let table = new DataTable('#myTable', {
     responsive: true
     });
   </script>
+
 </body>
 
 </html>
