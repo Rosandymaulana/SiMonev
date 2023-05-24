@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -27,7 +27,7 @@
                         <div class="login-wrap p-4 p-md-5">
                             <div class="d-flex">
                                 <div class="w-100">
-                                    <h3 class="mb-4">Login</h3>
+                                    <h3 class="mb-4">Register</h3>
                                 </div>
                             </div>
                             <form action="#" class="signin-form">
@@ -43,11 +43,11 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit"
-                                        class="form-control btn btn-primary rounded submit px-3">Login</button>
+                                        class="form-control btn btn-primary rounded submit px-3">Register</button>
                                 </div>
                             </form>
-                            <p class="text-center">Belum punya akun? <a data-toggle="tab"
-                                    href="{{ url('/register') }}">Register</a></p>
+                            <p class="text-center">Sudah punya akun? <a data-toggle="tab"
+                                    href="{{ url('/login') }}">Login</a></p>
                         </div>
                     </div>
                 </div>

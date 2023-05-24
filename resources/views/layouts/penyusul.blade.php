@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SuperAdmin</title>
+    <title>Penyusul</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@
         rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="{{ asset('style/css/super-admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('style/css/penyusul.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
@@ -32,11 +32,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/super-admin') }}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="{{ asset('style/img/ic-super-admin.png') }}" alt="">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/penyusul') }}">
+                <div class="sidebar-brand-icon">
+                    <img src="{{ asset('style/img/ic-penyusul.png') }}" alt="">
                 </div>
-                <div class="sidebar-brand-text mx-3">Super Admin</div>
+                <div class="sidebar-brand-text mx-3">Penyusul</div>
             </a>
 
             <!-- Divider -->
@@ -44,7 +44,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/super-admin') }}">
+                <a class="nav-link" href="{{ url('penyusul') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -59,16 +59,9 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/super-admin/admin') }}">
+                <a class="nav-link" href="{{ url('/penyusul/tabel-usulan') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Data Admin</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/super-admin/penyusul') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Data Penyusul</span></a>
+                    <span>Progress Usulan</span></a>
             </li>
 
             <!-- Divider -->
@@ -84,7 +77,6 @@
                 <img class="sidebar-card-illustration mb-2" src="{{ asset('style/img/logo.png') }}" alt="Logo Bappeda">
                 <p class="text-center mb-2"><strong>BAPPEDA MALANG</strong></p>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -93,10 +85,10 @@
             <div class="content">
 
                 {{-- Header --}}
-                @include('layouts.header-super-admin')
+                @include('layouts.header-penyusul')
 
                 <div class="container-fluid">
-                    @yield('super-admin')
+                    @yield('penyusul')
                 </div>
             </div>
         </div>
@@ -131,11 +123,10 @@
     <script src="{{ asset('style/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('style/js/demo/chart-pie-demo.js') }}"></script>
 
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script>
         let table = new DataTable('#myTable', {
-                responsive: true
-                });
+                    responsive: true
+                    });
     </script>
 </body>
 

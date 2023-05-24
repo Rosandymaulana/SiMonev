@@ -1,5 +1,5 @@
-@extends('layouts.index')
-@section('content')
+@extends('layouts.admin')
+@section('admin')
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,11 +20,12 @@
             <h1>Tabel Usulan</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Tabel Usulan</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>
+        <!-- End Page Title -->
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -35,7 +36,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
                         </div>
-                        <form action="{{ url('/importusulan') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('/admin/importusulan') }}" method="post" enctype="multipart/form-data">
                             <div class="modal-body">
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -57,16 +58,16 @@
         <section class="dashboard">
             <div class="row">
                 <div class="col-12">
-                    <div class="card recent-sales overflow-auto">
+                    <div class="card recent-sales overflow-auto mb-4">
                         <div class="card-body">
 
                             <div class="mb-4">
-                                <a href="{{ url('exportusulan') }}" class="btn btn-success">Export</a>
+                                <a href="{{ url('/admin/exportusulan') }}" class="btn btn-success">Export</a>
                                 <a href="" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Import</a>
                             </div>
 
-                            <table class="table table-borderless datatable">
+                            <table class="table table-borderless datatable" id="myTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">Kelurahan</th>

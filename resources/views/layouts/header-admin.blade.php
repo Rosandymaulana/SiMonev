@@ -24,9 +24,9 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="/admin" id="userDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Super Admin</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
                     <img class="img-profile rounded-circle" src="{{ asset('style/img/profile-img.jpg') }}">
                 </a>
                 <!-- Dropdown - User Information -->
