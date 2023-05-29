@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin', function (Blueprint $table) {
-            $table->id('id_admin');
-            $table->string('username');
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->string('no_telp', 15);
-            $table->string('foto');
-            $table->timestamps();
-        });
+        // Schema::create('admin', function (Blueprint $table) {
+        //     $table->id('id_admin');
+        //     // $table->unsignedBigInteger('id_user');
+        //     $table->string('data');
+        //     $table->timestamps();
+
+        //     // $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+        // });
     }
 
     /**

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('realisasi');
             $table->date('tgl_pelaksanaan');
             $table->string('keterangan', 100);
+            // $table->string('status')->default('pending');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

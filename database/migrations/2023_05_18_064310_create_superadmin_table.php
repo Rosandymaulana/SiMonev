@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('superadmin', function (Blueprint $table) {
-            $table->id('id_superadmin');
-            $table->string('username');
-            $table->string('password');
-            $table->timestamps();
-        });
+        // Schema::create('superadmin', function (Blueprint $table) {
+        //     $table->id('id_superadmin');
+        //     // $table->unsignedBigInteger('id_user');
+        //     $table->string('data');
+        //     $table->timestamps();
+
+        //     // $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+        // });
     }
 
     /**

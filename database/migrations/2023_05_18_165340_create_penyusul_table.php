@@ -11,21 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penyusul', function (Blueprint $table) {
-            $table->increments('id_penyusul');
-            $table->integer('id_wilayah')->unsigned();
-            $table->string('username', 100);
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->string('name', 50);
-            $table->string('jabatan', 50);
-            $table->string('no_telp', 15);
-            $table->string('foto');
+        // Schema::create('penyusul', function (Blueprint $table) {
+        //     $table->increments('id_penyusul');
+        //     // $table->unsignedBigInteger('id_user');
+        //     // $table->integer('id_wilayah')->unsigned();
+        //     $table->string('foto');
+        //     $table->timestamps();
 
-            $table->timestamps();
-
-            $table->foreign('id_wilayah')->references('id_wilayah')->on('wilayah');
-        });
+        //     // $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+        //     // $table->foreign('id_wilayah')->references('id_wilayah')->on('wilayah');
+        // });
     }
 
     /**
