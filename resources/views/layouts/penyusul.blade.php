@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Penyusul</title>
 
+    <link href="{{ asset('style/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('style/img/favicon.png') }}" rel="apple-touch-icon">
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -62,6 +65,12 @@
                 <a class="nav-link" href="{{ url('/penyusul/tabel-usulan') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Progress Usulan</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/penyusul/status-usulan') }}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Status Usulan</span></a>
             </li>
 
             <!-- Divider -->
@@ -122,7 +131,7 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('style/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('style/js/demo/chart-pie-demo.js') }}"></script>
-
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script>
         let table = new DataTable('#myTable', {
                     responsive: true

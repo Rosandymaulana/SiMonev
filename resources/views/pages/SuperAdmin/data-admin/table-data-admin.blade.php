@@ -18,40 +18,42 @@
                         <div class="card top-selling overflow-auto">
                             <div class="card-body pb-0">
                                 <h5 class="card-title">Tabel Admin</h5>
+                                <a href="{{ url('/super-admin/admin/create') }}">
+                                    <button class="btn btn-success mb-4">Tambah Admin</button>
+                                </a>
                                 <table class="table table-borderless table-bordered py-3" id="myTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Username</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Wilayah</th>
+                                            <th scope="col">Jabatan</th>
                                             <th scope="col">No Telp</th>
-                                            <th scope="col">Foto</th>
+                                            <th scope="col">Role</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($admin as $item)
+                                        @foreach ($users as $item)
                                         <tr>
+
                                             <td>{{ $item->username }}</td>
                                             <td>{{ $item->email }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->wilayah->nama_wilayah }}</td>
+                                            <td>{{ $item->jabatan }}</td>
                                             <td>{{ $item->no_telp }}</td>
-                                            <td>
-                                                <img class="img-fluid mx-auto" style="max-width: 100%"
-                                                    src="{{asset('storage/'.$item->foto)}}" alt="">
-                                            </td>
+                                            <td>{{ $item->role->name }}</td>
+                                            {{-- <td>{{ $item->role }}</td> --}}
                                             <td class="d-flex justify-content-evenly px-3">
-                                                {{-- <a href="{{ url('/data_barang/' . $item->id_admin) }}" title="View"
-                                                    data-toggle="modal" data-target="#showModal{{ $item->id_admin }}">
-                                                    <button type="button" class="btn btn-sm btn-primary">
-                                                        view
-                                                    </button>
-                                                </a> --}}
-                                                <a href="{{ url('/data_barang/' . $item->id_admin . '/edit') }}"
+                                                <a href="{{ url('/super-admin'.'/'.'admin'.'/'.$item->id_user . '/edit') }}"
                                                     class="edit px-1" data-toggle="toggle">
                                                     <button type="button" class="btn btn-sm btn-success">
                                                         edit
                                                     </button>
                                                 </a>
-                                                <form action="{{ url('super-admin'.'/'.'admin'.'/'.$item->id_admin) }}"
+                                                <form action="{{ url('super-admin'.'/'.'admin'.'/'.$item->id_user) }}"
                                                     method="post">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}

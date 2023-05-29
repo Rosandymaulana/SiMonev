@@ -30,20 +30,43 @@
                                     <h3 class="mb-4">Login</h3>
                                 </div>
                             </div>
-                            <form action="#" class="signin-form">
-                                <div class="form-group mt-3">
-                                    <input type="text" class="form-control" required>
-                                    <label class="form-control-placeholder" for="username">Username</label>
+
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
+
+                            <form class="signin-form" method="POST" action="{{ __('login') }}">
+                                @csrf
+                                <div>
+                                    <label for="email"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                                        email</label>
+                                    <input type="email" id="email" name="email"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="name@flowbite.com">
+                                    @if ($errors->has('email'))
+
+                                    @endif
+                                </div>
+
+                                <div>
+                                    <label for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                                        password</label>
+                                    <input type="password" id="password" name="password"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
                                 <div class="form-group">
-                                    <input id="password-field" type="password" class="form-control" required>
-                                    <label class="form-control-placeholder" for="password">Password</label>
-                                    <span toggle="#password-field"
-                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit"
-                                        class="form-control btn btn-primary rounded submit px-3">Login</button>
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">
+                                        Login
+                                    </button>
                                 </div>
                             </form>
                             <p class="text-center">Belum punya akun? <a data-toggle="tab"

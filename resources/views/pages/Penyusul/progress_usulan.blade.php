@@ -48,13 +48,13 @@
                                             <td>{{ $item->tgl_pelaksanaan }}</td>
                                             <td>{{ $item->keterangan }}</td>
                                             <td class="d-flex justify-content-evenly px-3">
-                                                <a href="{{ url('/penyusul/tabel-usulan/' . $item->id . '/edit') }}"
+                                                <a href="{{ url('/penyusul/tabel-usulan/' . $item->id_usulan . '/edit') }}"
                                                     class="edit px-1" data-toggle="toggle">
                                                     <button type="button" class="btn btn-sm btn-success">
                                                         edit
                                                     </button>
                                                 </a>
-                                                <form action="{{ url('super-admin'.'/'.'penyusul'.'/') }}"
+                                                {{-- <form action="{{ url('super-admin'.'/'.'penyusul'.'/') }}"
                                                     method="post">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
@@ -62,7 +62,7 @@
                                                         class="btn btn-sm btn-danger btndelete">
                                                         delete
                                                     </button>
-                                                </form>
+                                                </form> --}}
                                             </td>
                                         </tr>
                                         @endforeach

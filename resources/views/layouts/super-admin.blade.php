@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SuperAdmin</title>
 
+    <!-- Favicons -->
+    <link href="{{ asset('style/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('style/img/favicon.png') }}" rel="apple-touch-icon">
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link

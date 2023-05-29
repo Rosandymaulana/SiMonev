@@ -19,7 +19,7 @@
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('/tabel_usulan') }}">Tabel Usulan</a></li>
                     <li class="breadcrumb-item active">Edit</li>
-                    <li class="breadcrumb-item">{{ $usulanPenyusul->id }}</li>
+                    <li class="breadcrumb-item">{{ $usulanPenyusul->id_usulan }}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -30,7 +30,7 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
                             <form class="form-horizontal"
-                                action="{{ url('penyusul/tabel-usulan/' .$usulanPenyusul->id .'/update') }}"
+                                action="{{ url('penyusul/tabel-usulan/' .$usulanPenyusul->id_usulan .'/update') }}"
                                 method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
