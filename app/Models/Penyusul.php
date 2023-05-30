@@ -25,6 +25,11 @@ class Penyusul extends Model
         'username', 'password', 'email'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
     public function wilayah()
     {
         return $this->belongsTo(Wilayah::class, 'id_wilayah');

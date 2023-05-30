@@ -14,9 +14,4 @@ class Wilayah extends Model
     protected $fillable = [
         'nama_wilayah'
     ];
-
-    // public function penyusul()
-    // {
-    //     return $this->hasMany(Penyusul::class, 'id_wilayah');
-    // }
 }

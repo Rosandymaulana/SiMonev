@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Wilayah;
@@ -54,15 +55,13 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        // $input = $request->all();
-        // User::create($input);
-        $admin = "2";
+        // $admin = "2";
 
         $data = new User([
             'username' => $request->get('username'),
-            'id_role' => $admin,
+            'id_role' => "2", // Diisi 2 karena relasi pada Tabel Role, 2 untuk Admin
             'email' => $request->get('email'),
-            'password' => $request->get('password'),
+            'password' => Hash::make($request->get('password')),
             'name' => $request->get('name'),
             'jabatan' => $request->get('jabatan'),
             'no_telp' => $request->get('no_telp'),

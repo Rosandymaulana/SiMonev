@@ -10,7 +10,7 @@ class Usulan extends Model
     use HasFactory;
 
     protected $table = 'usulan';
-    protected $primaryKey = 'id'; //nanti diubah menjadi id_usulan
+    protected $primaryKey = 'id_usulan';
     protected $fillable = [
         'kelurahan', 'no', 'sub_kegiatan', 'usulan', 'alamat', 'opd_tujuan_akhir', 'koefisien', 'nilai_akomodir', 'realisasi', 'tgl_pelaksanaan', 'keterangan'
     ];

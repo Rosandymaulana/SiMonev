@@ -15,6 +15,8 @@ class WilayahSeeder extends Seeder
     public function run(): void
     {
         $dataKelurahan = [
+            //
+            'Petugas Bappeda',
             // Klojen
             'Klojen',
             'Rampal Celaket',

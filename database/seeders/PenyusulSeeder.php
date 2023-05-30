@@ -16,30 +16,30 @@ class PenyusulSeeder extends Seeder
      */
     public function run(): void
     {
-        $jabatan = [
-            'Penyusul Tes',
-            'Sekretariat Desa',
-            'Pelaksana Teknis',
-            'Kepala Urusan Keuangan',
-            'Kepala Urusan Perencanaan',
-            'Seksi Pemerintahan',
-        ];
-
         $faker = Faker::create('id_ID');
-
-        foreach ($jabatan as $data) {
-            Penyusul::create([
+        for ($i = 1; $i <= 5; $i++) {
+            DB::table('penyusul')->insert([
+                'id_user' => $faker->numberBetween(1, 5),
                 'id_wilayah' => $faker->numberBetween(1, 25),
-                'username' => $faker->userName(),
-                'password' => $faker->password(),
-                'email' => $faker->unique()->safeEmail(),
-                'name' => $faker->name(),
-                'jabatan' => $data,
-                'no_telp' => $faker->numerify('08###########'),
                 'foto' => $faker->imageUrl(640, 480, 'animals', true),
                 'created_at' => new DateTime(now()),
                 'updated_at' => new DateTime(now())
             ]);
-        }
+        };
+
+        // foreach ($jabatan as $data) {
+        //     Penyusul::create([
+        //         'id_user' => $faker->numberBetween(1, 5),
+        //         'id_wilayah' => $faker->numberBetween(1, 25),
+        //         // 'username' => $faker->userName(),
+        //         // 'password' => $faker->password(),
+        //         // 'email' => $faker->unique()->safeEmail(),
+        //         // 'name' => $faker->name(),
+        //         // 'jabatan' => $data,
+        //         'foto' => $faker->imageUrl(640, 480, 'animals', true),
+        //         'created_at' => new DateTime(now()),
+        //         'updated_at' => new DateTime(now())
+        //     ]);
+        // }
     }
 }

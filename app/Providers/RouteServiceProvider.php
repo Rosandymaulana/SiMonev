@@ -17,7 +17,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    // mendefinisikan nilai konstan yg mengacu ke URL atau Path
     public const HOME = '/home';
+    public const SUPER_ADMIN = '/super-admin';
+    public const ADMIN = '/admin';
+    public const PENYUSUL = '/penyusul';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
