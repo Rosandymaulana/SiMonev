@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SuperAdmin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Penyusul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SuperAdminController extends Controller
+class DashboardSuperAdmin extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -1,39 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SuperAdmin;
 
-use App\Http\Requests\InputPenyusul;
-use Illuminate\Http\Request;
-use App\Models\Penyusul;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Wilayah;
+use Illuminate\Http\Request;
 
-class PenyusulController extends Controller
+class DataAdmin extends Controller
 {
     /**
      * Display a listing of the resource.
-     * Ini Data Penyusul bagian Super Admin
-     * Controller untuk SuperAdmin mengontrol seluruh data Penyusul 
+     * Ini Data Admin bagian Super Admin
+     * Controller untuk SuperAdmin mengontrol seluruh data Admin(InternalBappeda)
      */
     public function index()
     {
+        // $getAdmin = User::whereHas('users', function ($query) {
+        //     $query->where('id_role', 2);
+        // })->get();
 
-        $adminRole = Role::where('name', 'penyusul')->first(); // Mendapatkan peran 'admin' dari tabel roles
+        $adminRole = Role::where('name', 'admin')->first(); // Mendapatkan peran 'admin' dari tabel roles
 
         $users = User::where('id_role', $adminRole->id_role)->get();
 
         // return view('pages.SuperAdmin.data_admin', [
         //     'admin' => $users,
         // ]);
-        return view('pages.superadmin.data-penyusul.table-data-penyusul', compact('users'));
-        // $penyusul = Penyusul::all();
-
-        // $penyusul = Penyusul::whereHas('user', function ($query) {
-        //     $query->where('role', 'penyusul');
-        // })->get();
-
-
+        return view('pages.superadmin.data-admin.table-data-admin', compact('users'));
     }
 
     /**
@@ -41,13 +37,14 @@ class PenyusulController extends Controller
      */
     public function create()
     {
-        // $role = Role::all();
-        $role = Role::where('id_role', 3)->get();
+        $role = Role::where('id_role', 2)->get();
 
         // Tidak menampilkan seluruh wilayah karena id 1 nilainya Internal Bappeda
-        $wilayah = Wilayah::whereNotIn('id_wilayah', [1])->get();
+        // $wilayah = Wilayah::whereNotIn('id_wilayah', [1])->get();
+        // $wilayah = Role::find(1);
+        $wilayah = Wilayah::where('id_wilayah', 1)->get();
 
-        return view('pages.superadmin.data-penyusul.create-penyusul', [
+        return view('pages.superadmin.data-admin.create-Admin', [
             'role' => $role,
             'wilayah' => $wilayah,
         ]);
@@ -58,22 +55,20 @@ class PenyusulController extends Controller
      */
     public function store(Request $request)
     {
-        // INSERT INTO `users` (`id_user`, `id_role`, `id_wilayah`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `name`, `jabatan`, `no_telp`, `created_at`, `updated_at`) VALUES (NULL, '3', '54', 'ojokjo', 'joo', NULL, '', NULL, '', '', NULL, NULL, NULL);
-
-        $penyusul = "3";
+        // $admin = "2";
 
         $data = new User([
             'username' => $request->get('username'),
-            'id_role' => $penyusul,
+            'id_role' => "2", // Diisi 2 karena relasi pada Tabel Role, 2 untuk Admin
             'email' => $request->get('email'),
-            'password' => $request->get('password'),
+            'password' => Hash::make($request->get('password')),
             'name' => $request->get('name'),
             'jabatan' => $request->get('jabatan'),
             'no_telp' => $request->get('no_telp'),
             'id_wilayah' => $request->get('wilayah')
         ]);
         $data->save();
-        return redirect('/super-admin/penyusul')->with('success', 'Penyusul berhasil ditambahkan');
+        return redirect('/super-admin/admin')->with('success', 'Penyusul berhasil ditambahkan');
     }
 
     /**
@@ -89,14 +84,14 @@ class PenyusulController extends Controller
      */
     public function edit(string $id_user)
     {
-        $role = Role::where('id_role', 3)->get();
+        $role = Role::where('id_role', 2)->get();
         $user = User::find($id_user);
         // Tidak menampilkan seluruh wilayah karena id 1 nilainya Internal Bappeda
         // $wilayah = Wilayah::whereNotIn('id_wilayah', [1])->get();
         // $wilayah = Role::find(1);
         $wilayah = Wilayah::where('id_wilayah', 1)->get();
 
-        return view('pages.superadmin.data-penyusul.edit-penyusul', [
+        return view('pages.superadmin.data-admin.edit-admin', [
             'role' => $role,
             'wilayah' => $wilayah,
             'user' => $user,
@@ -109,7 +104,7 @@ class PenyusulController extends Controller
     public function update(Request $request, $id_user)
     {
         $data = User::find($id_user);
-        $admin = "";
+        $admin = "2";
 
         $data->username = $request->get('username');
         $data->id_role = $admin;
@@ -122,7 +117,7 @@ class PenyusulController extends Controller
 
         $data->update();
 
-        return redirect('super-admin/penyusul');
+        return redirect('super-admin/admin');
     }
 
     /**
@@ -130,9 +125,9 @@ class PenyusulController extends Controller
      */
     public function destroy($id_user)
     {
-        $hapusDataPenyusul = User::findorfail($id_user);
+        $hapusDataAdmin = User::findorfail($id_user);
 
-        $hapusDataPenyusul->delete();
-        return redirect('super-admin/penyusul');
+        $hapusDataAdmin->delete();
+        return redirect('super-admin/admin');
     }
 }
