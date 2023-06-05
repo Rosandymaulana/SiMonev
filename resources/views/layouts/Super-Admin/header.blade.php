@@ -23,7 +23,7 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
                     <img class="img-profile rounded-circle" src="{{ asset('style/img/profile-img.jpg') }}">
                 </a>
                 <!-- Dropdown - User Information -->
@@ -41,7 +41,7 @@
                         @csrf
 
                         <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                                            this.closest('form').submit();"
+                                                                    this.closest('form').submit();"
                             class="dropdown-item">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             {{ __('Log Out') }}
@@ -53,6 +53,7 @@
         </ul>
     </nav>
     <!-- End of Topbar -->
+    {{-- <script src="{{ asset('style/js/sb-admin-2.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>

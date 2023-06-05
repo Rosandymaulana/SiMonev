@@ -86,7 +86,7 @@
             <div class="content">
 
                 {{-- Header --}}
-                @include('layouts.header-admin')
+                @include('layouts.admin.header')
 
                 <div class="container-fluid">
                     @yield('admin')

@@ -57,7 +57,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Data
             </div>
 
             <!-- Nav Item - Tables -->
@@ -94,7 +94,7 @@
             <div class="content">
 
                 {{-- Header --}}
-                @include('layouts.header-penyusul')
+                @include('layouts.pengusul.header')
 
                 <div class="container-fluid">
                     @yield('penyusul')
@@ -134,7 +134,7 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script>
         let table = new DataTable('#myTable', {
-                    responsive: true
+                    responsive: true,
                     });
     </script>
 </body>

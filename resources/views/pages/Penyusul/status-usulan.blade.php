@@ -1,4 +1,4 @@
-@extends('layouts.penyusul')
+@extends('layouts.pengusul.index')
 @section('penyusul')
 
 <!DOCTYPE html>
@@ -18,7 +18,6 @@
                         <div class="card top-selling overflow-auto">
                             <div class="card-body pb-0">
                                 <h5 class="card-title">Status Usulan</h5>
-
                             </div>
                         </div>
                     </div>

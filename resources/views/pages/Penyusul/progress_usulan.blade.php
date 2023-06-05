@@ -1,4 +1,4 @@
-@extends('layouts.penyusul')
+@extends('layouts.pengusul.index')
 @section('penyusul')
 <!DOCTYPE html>
 <html lang="en">
@@ -19,41 +19,62 @@
                                 <table class="table table-borderless table-bordered py-3" id="myTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Kelurahan</th>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Sub Kegiatan</th>
+                                            <th scope="col">ID Usulan</th>
+                                            <th scope="col">NO</th>
+                                            <th scope="col">Tgl Usulan</th>
+                                            <th scope="col">Fraksi</th>
+                                            <th scope="col">Pengusul</th>
                                             <th scope="col">Usulan</th>
+                                            <th scope="col">Masalah</th>
+                                            <th scope="col">Prioritas Usulan</th>
                                             <th scope="col">Alamat</th>
-                                            <th scope="col">OPD Tujuan Akhir</th>
-                                            <th scope="col">Koefisien</th>
+                                            <th scope="col">Kelurahan</th>
+                                            <th scope="col">opd_tujuan_awal</th>
+                                            <th scope="col">opd_tujuan_akhir</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Volume</th>
+                                            <th scope="col">Satuan</th>
+                                            <th scope="col">Harga Satuan</th>
+                                            <th scope="col">Nilai Usulan</th>
                                             <th scope="col">Nilai Akomodir</th>
-                                            <th scope="col">Realisasi</th>
-                                            <th scope="col">Tanggal Pelaksanaan</th>
-                                            <th scope="col">Keterangan</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($usulanPenyusul as $item)
                                         <tr>
-                                            <td>{{ $item->kelurahan }}</td>
+                                            <td>{{ $item->id_usulan }}</td>
                                             <td>{{ $item->no }}</td>
-                                            <td>{{ $item->sub_kegiatan }}</td>
+                                            <td>{{ $item->tgl_usulan }}</td>
+                                            <td>{{ $item->fraksi }}</td>
+                                            <td>{{ $item->pengusul }}</td>
                                             <td>{{ $item->usulan }}</td>
+                                            <td>{{ $item->masalah }}</td>
+                                            <td>{{ $item->prioritas_usulan }}</td>
                                             <td>{{ $item->alamat }}</td>
+                                            <td>{{ $item->nama_wilayah }}</td>
+                                            <td>{{ $item->opd_tujuan_awal }}</td>
                                             <td>{{ $item->opd_tujuan_akhir }}</td>
-                                            <td>{{ $item->koefisien }}</td>
+                                            <td>{{ $item->status }}</td>
+                                            <td>{{ $item->volume }}</td>
+                                            <td>{{ $item->id_satuan }}</td>
+                                            <td>{{ $item->harga_satuan }}</td>
+                                            <td>{{ $item->nilai_usulan }}</td>
                                             <td>{{ $item->nilai_akomodir }}</td>
-                                            <td>{{ $item->realisasi }}</td>
-                                            <td>{{ $item->tgl_pelaksanaan }}</td>
-                                            <td>{{ $item->keterangan }}</td>
                                             <td class="d-flex justify-content-evenly px-3">
-                                                <a href="{{ url('/penyusul/tabel-usulan/' . $item->id_usulan . '/edit') }}"
+                                                <a href="{{ url('penyusul/'. 'tabel-usulan/' .$item->id_usulan. '/laporkan-data') }}"
                                                     class="edit px-1" data-toggle="toggle">
                                                     <button type="button" class="btn btn-sm btn-success">
-                                                        edit
+                                                        Laporkan Progress
                                                     </button>
                                                 </a>
+                                                {{-- <a
+                                                    href="{{ url('/penyusul/tabel-usulan/' . $item->id_usulan . '/edit') }}"
+                                                    class="edit px-1" data-toggle="toggle">
+                                                    <button type="button" class="btn btn-sm btn-success">
+                                                        Laporkan Progress
+                                                    </button>
+                                                </a> --}}
                                                 {{-- <form action="{{ url('super-admin'.'/'.'penyusul'.'/') }}"
                                                     method="post">
                                                     {{ method_field('DELETE') }}

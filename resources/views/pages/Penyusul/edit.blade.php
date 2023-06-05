@@ -1,4 +1,4 @@
-@extends('layouts.penyusul')
+@extends('layouts.pengusul.index')
 @section('penyusul')
 
 <!DOCTYPE html>
@@ -128,6 +128,11 @@
                                             value="{{ $usulanPenyusul->keterangan }}" />
                                     </div>
                                 </div>
+
+                                <!-- Input fields for report data -->
+                                @foreach ($report as $reports)
+                                <input type="text" name="report[]" value="{{ $reports->realisasi }}">
+                                @endforeach
 
                                 <input type="submit" value="update" class="btn btn-success">
                             </form>
