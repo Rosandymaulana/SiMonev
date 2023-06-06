@@ -13,20 +13,28 @@ return new class extends Migration
     {
         Schema::create('usulan', function (Blueprint $table) {
             $table->id('id_usulan');
-            $table->string('kelurahan', 50);
-            $table->integer('no');
-            $table->string('sub_kegiatan', 100);
-            $table->string('usulan', 150);
-            $table->string('alamat', 150);
-            $table->string('opd_tujuan_akhir', 50);
-            $table->string('koefisien', 75);
-            $table->integer('nilai_akomodir');
-            $table->integer('realisasi');
-            $table->date('tgl_pelaksanaan');
-            $table->string('keterangan', 100);
-            // $table->string('status')->default('pending');
-            $table->boolean('status')->default(false);
+            $table->string('no')->nullable();
+            $table->string('tgl_usulan')->nullable();
+            $table->string('fraksi')->nullable();
+            $table->string('pengusul')->nullable();
+            $table->string('usulan')->nullable();
+            $table->text('masalah')->nullable();
+            $table->string('prioritas_usulan')->nullable();
+            $table->string('alamat')->nullable();
+            // $table->string('kelurahan')->nullable();
+            $table->unsignedBigInteger('kelurahan')->nullable();
+            $table->string('opd_tujuan_awal')->nullable();
+            $table->string('opd_tujuan_akhir')->nullable();
+            $table->string('status')->nullable();
+            $table->string('volume')->nullable();
+            $table->unsignedBigInteger('id_satuan')->nullable();
+            $table->string('harga_satuan')->nullable();
+            $table->string('nilai_usulan')->nullable();
+            $table->string('nilai_akomodir')->nullable();
             $table->timestamps();
+
+            $table->foreign('id_satuan')->references('id_satuan')->on('satuan')->onDelete('cascade');
+            $table->foreign('kelurahan')->references('id_wilayah')->on('wilayah')->onDelete('cascade');
         });
     }
 
