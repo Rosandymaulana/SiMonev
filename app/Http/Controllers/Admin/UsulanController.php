@@ -104,9 +104,9 @@ class UsulanController extends Controller
     public function show(string $id)
     {
         //
-        $detail = Usulan::find($id);
-        // dd($data);
-        return view('pages.admin.detail-data', compact('detail'));
+        // $detail = Usulan::find($id);
+        // // dd($data);
+        // return view('pages.admin.detail-data', compact('detail'));
     }
 
     /**
@@ -114,10 +114,10 @@ class UsulanController extends Controller
      */
     public function edit(string $id)
     {
-        // $usulan = Usulan::find($id);
-        // return view('pages.Admin.edit', [
-        //     'usulan' => $usulan
-        // ]);
+        $usulan = Usulan::find($id);
+        return view('pages.admin.detail-data', [
+            'usulan' => $usulan
+        ]);
     }
 
     /**
@@ -125,10 +125,32 @@ class UsulanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $validatedData = $request->only(['realisasi', 'tgl_pelaksanaan', 'keterangan']);
-        // $usulan = Usulan::find($id);
-        // $usulan->update($validatedData);
-        // return redirect('tabel_usulan');
+        $validatedData = $request->only(
+            [
+                // 'no',
+                // 'tgl_usulan',
+                'fraksi',
+                'pengusul',
+                'usulan',
+                'masalah',
+                'prioritas_usulan',
+                'alamat',
+                'kelurahan',
+                'opd_tujuan_awal',
+                'opd_tujuan_akhir',
+                'status',
+                'volume',
+                'id_satuan',
+                'harga_satuan',
+                'nilai_usulan',
+                'nilai_akomodir',
+                'keterangan',
+                'nama_wilayah'
+            ]
+        );
+        $usulan = Usulan::find($id);
+        $usulan->update($validatedData);
+        return redirect('admin/tabel-usulan');
     }
 
     /**

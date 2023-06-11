@@ -18,13 +18,7 @@ class UsulanPenyusul extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
         $wilayahUser = auth()->user()->wilayah->nama_wilayah;
-
-        // $usulanPenyusul = DB::table('usulan')
-        //     ->limit(100)
-        //     ->get();
-
 
         // Mengambil data dari tabel usulan sesuai wilayah
         $usulanPenyusul = DB::table('usulan')
@@ -33,41 +27,134 @@ class UsulanPenyusul extends Controller
             ->limit(100)
             ->get();
 
+        // $usulanPenyusul = DB::table('usulan')
+        //     ->join(
+        //         'wilayah',
+        //         'usulan.kelurahan',
+        //         '=',
+        //         'wilayah.id_wilayah'
+        //     )
+        //     ->leftJoin('report', function ($join) {
+        //         $join->on('report.id_usulan', '=', 'usulan.id_usulan')
+        //             ->where(
+        //                 'report.status',
+        //                 '=',
+        //                 'approved'
+        //             )
+        //             // ->whereIn('report.status', ['approved'])
+        //             ->whereRaw('report.updated_at = (SELECT MAX(updated_at) FROM report WHERE id_usulan = usulan.id_usulan)');
+        //     })
+        //     ->where('wilayah.nama_wilayah', $wilayahUser)
+        //     ->select('usulan.*', 'report.realisasi')
+        //     ->orderBy('usulan.no', 'asc')
+        //     ->get();
+
         // dd($usulanPenyusul);
 
-        return view('pages.Penyusul.progress_usulan', compact('usulanPenyusul'));
+        return view('pages.Penyusul.progress_usulan', compact('usulanPenyusul',));
     }
+
 
     public function laporkanData($id)
     {
         $usulan = Usulan::findOrFail($id);
+        $namaWilayah = $usulan->wilayah ? $usulan->wilayah->nama_wilayah : 'belum ada';
+        // $report = Report::where('id_usulan', $usulan->id_usulan)->first();
         // dd($usulan);
-        $reports = $usulan->reports;
+        // if ($report) {
+        //     return redirect()->back()->with('error', 'Tidak dapat mengedit usulan. Terdapat report dalam proses persetujuan Admin.');
+        // }
+        // dd($usulan);
 
-        return view('pages.Penyusul.report-data', compact('usulan', 'reports'));
+        // $selectedID = $usulan->id_usulan;
+        $selectedID = $usulan->id_usulan;
+
+        $latestDate = DB::table('report')
+            ->where('id_usulan', $selectedID)
+            ->max('updated_at');
+
+        $latestReports = DB::table('report')
+            ->join('usulan', 'report.id_usulan', '=', 'usulan.id_usulan')
+            ->where('report.id_usulan', $selectedID)
+            ->where('report.status', 'approved')
+            ->whereIn('report.updated_at', function ($query) use ($selectedID) {
+                $query->select(DB::raw('MAX(updated_at)'))
+                    ->from('report')
+                    ->where('id_usulan', $selectedID);
+            })
+            ->select('report.*')
+            ->latest('report.updated_at')
+            ->first();
+
+
+        // $latestReports = DB::table('report')
+        //     ->join('usulan', 'report.id_usulan', '=', 'usulan.id_usulan')
+        //     ->select('report.*')
+        //     ->where('usulan.id_usulan', $selectedID)
+        //     ->where('report.status', 'approved')
+        //     ->whereRaw('report.updated_at = (SELECT MAX(updated_at) FROM report WHERE id_usulan = report.id_usulan)')
+        //     ->latest('report.updated_at')
+        //     ->first();
+
+
+        // Paten
+        // $latestReports = DB::table('report')
+        //     ->join('usulan', 'report.id_usulan', '=', 'usulan.id_usulan')
+        //     ->select('report.*')
+        //     ->where('report.status', 'approved')
+        //     ->where('report.id_usulan', $selectedID)
+        //     ->where(function ($query) use ($selectedID) {
+        //         $query->where('report.status', 'approved')
+        //             ->whereDate('report.updated_at', '=', DB::raw("(SELECT MAX(updated_at) FROM report WHERE id_usulan = $selectedID)"));
+        //         ->whereRaw('report.updated_at = (SELECT MAX(updated_at) FROM report WHERE id_usulan = report.id_usulan)');
+        //     })
+        //     ->latest('report.updated_at')
+        //     ->first();
+
+        // dd($selectedID, $latestDate, $latestReports);
+
+        $dataReports = Report::where('id_usulan', $id)->get();
+
+        return view('pages.Penyusul.report-data', compact('usulan', 'dataReports', 'latestReports', 'namaWilayah'));
     }
 
     public function simpanLaporan(Request $request, $id)
     {
         $usulan = Usulan::findOrFail($id);
-        $lastNumber = Report::orderBy('id_report', 'desc')->value('id_report');
-        // dd($lastNumber);
 
-        if ($lastNumber) {
-            // Menghasilkan nomor baru dengan menambahkan 1 ke nomor terakhir
-            $newNumber = $lastNumber + 1;
-        } else {
-            // Jika tidak ada nomor sebelumnya, nomor baru akan dimulai dari 1
-            $newNumber = 1;
-        }
+        // $lastNumber = Report::orderBy('id_report', 'desc')->value('id_report');
+        // // dd($lastNumber);
+
+        // if ($lastNumber) {
+        //     // Menghasilkan nomor baru dengan menambahkan 1 ke nomor terakhir
+        //     $newNumber = $lastNumber + 1;
+
+        //     $data = [
+        //         'id_report' => $newNumber,
+        //         'id_usulan' => $usulan->id_usulan,
+        //         'realisasi' => $request->input('realisasi'),
+        //         'tgl_pelaksanaan' =>  $request->input('tgl_pelaksanaan'),
+        //         'keterangan' => $request->input('keterangan'),
+        //     ];
+        // } else {
+        //     // Jika tidak ada nomor sebelumnya, nomor baru akan dimulai dari 1
+        //     $newNumber = 1;
+        // }
+
 
         $data = [
-            // 'id_report' => "5",
             'id_usulan' => $usulan->id_usulan,
             'realisasi' => $request->input('realisasi'),
             'tgl_pelaksanaan' =>  $request->input('tgl_pelaksanaan'),
             'keterangan' => $request->input('keterangan'),
+            'waktu_pelaporan' => $request->input('waktu_pelaporan'),
         ];
+
+        if ($request->status == 'pending') {
+            $data['status'] = 'pending';
+        } elseif ($request->status == 'submitted') {
+            $data['status'] = 'submitted';
+        }
 
         // $usulan->reports()->create([
         //     'id_usulan' => $usulan->id_usulan,
@@ -76,38 +163,41 @@ class UsulanPenyusul extends Controller
         //     'keterangan' => $request->input('keterangan'),
         // ]);
 
-        $report = $usulan->reports()->create($data);
+        $usulan->reports()->create($data);
 
-        return redirect('penyusul/tabel-usulan');
+        return redirect('penyusul/tabel-usulan/' . $usulan->id_usulan . '/laporkan-data');
     }
 
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        return view('pages.Penyusul.report-data');
+        $usulan = Usulan::findOrFail($id);
+        $dataReports = Report::where('id_usulan', $id)->get();
+
+        return view('pages.Penyusul.report-data', compact('usulan', 'dataReports'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         // $report1 = $request->input('realisasi');
         // $report2 = $request->input('tgl_pelaksanaan');
         // $report3 = $request->input('keterangan');
 
-        $data = Report::create([
-            'realisasi' => $request->realisasi,
-            'tgl_pelaksanaan' => $request->tgl_pelaksanaan,
-            'keterangan' => $request->keterangan,
-        ]);
+        // $data = Report::create([
+        //     'realisasi' => $request->realisasi,
+        //     'tgl_pelaksanaan' => $request->tgl_pelaksanaan,
+        //     'keterangan' => $request->keterangan,
+        // ]);
 
-        $data->save();
+        // $data->save();
 
-        return redirect('penyusul/tabel-usulan')->with('flash_message', 'Addedd!');
+        return redirect(`penyusul/tabel-usulan/$id/laporkan-data`)->with('flash_message', 'Addedd!');
     }
 
     /**

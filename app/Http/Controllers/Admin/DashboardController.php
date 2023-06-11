@@ -45,7 +45,7 @@ class DashboardController extends Controller
 
         // $jmlProyekDlmProgress = DB::table('usulan')
         //     ->whereBetween('realisasi', [2, 100])
-        //     ->count();
+        //     ->count(); 
 
         return view('pages.Admin.dashboard', [
             'jmlUsulan' => $jmlUsulan,
