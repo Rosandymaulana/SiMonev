@@ -101,7 +101,7 @@ class UsersSeeder extends Seeder
             'id_wilayah' => '34', //Madyopuro
             'username' => $faker->userName(),
             'email' => $faker->unique()->safeEmail(),
-            'password' => Hash::make('Penyusul3'),
+            'password' => Hash::make('Penyusul3'), //Admin1234
             'name' => $faker->name(),
             'jabatan' => 'Sekertaris Desa',
             'no_telp' => $faker->phoneNumber(),

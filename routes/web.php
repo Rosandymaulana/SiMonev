@@ -6,9 +6,12 @@ use App\Http\Controllers\SuperAdmin\DataPenyusul;
 use App\Http\Controllers\SuperAdmin\DashboardSuperAdmin;
 use App\Http\Controllers\Admin\UsulanController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DaftarUsulanController;
 use App\Http\Controllers\Penyusul\DashboardPenyusul;
+use App\Http\Controllers\Penyusul\Profile;
 use App\Http\Controllers\Penyusul\UsulanPenyusul;
 use App\Http\Controllers\Penyusul\StatusUsulanController;
+use App\Http\Controllers\Penyusul\TambahReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +23,9 @@ use App\Http\Controllers\Penyusul\StatusUsulanController;
 | be assigned to the "web" middleware group. Make something great!
 | composer require maatwebsite/excel --with-all-dependencies
 */
+
+// Jumlah Usulan
+// 
 
 
 //Middleware sementara masih belum
@@ -35,7 +41,7 @@ Route::get('/register', function () {
 });
 
 Route::get('/', function () {
-    return ('Halaman HOME PAGE');
+    return view('welcome');
 });
 
 // Route::get('/loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
@@ -59,9 +65,15 @@ Route::prefix('super-admin')->group(function () {
 Route::prefix('admin')->group(function () {
     // [Dashboard] Menampilkan Informasi Untuk Admin
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index']);
+    Route::post('/reports/{id}/approve', [DaftarUsulanController::class, 'approveReport'])
+        ->name('report.approve');
+    Route::post('/reports/{id}/reject', [DaftarUsulanController::class, 'rejectReport'])
+        ->name('report.reject');
     // [Tabel Data Usulan] Menampilkan Seluruh Tabel Usulan
-    Route::get('/tabel-usulan', [UsulanController::class, 'index']);
-    Route::get('/tabel-usulan/{id}', [UsulanController::class, 'show']);
+    // Route::get('/tabel-usulan', [UsulanController::class, 'index']);
+    // Route::get('/tabel-usulan/{id}', [UsulanController::class, 'show']);
+    Route::resource('/tabel-usulan', UsulanController::class);
 
     Route::get('/exportusulan', [UsulanController::class, 'usulanexport']);
     Route::post('/importusulan', [UsulanController::class, 'usulanimport']);
@@ -74,12 +86,18 @@ Route::prefix('penyusul')->middleware(['auth', 'verified', 'role:3'])->group(fun
     Route::get('/', [DashboardPenyusul::class, 'index']);
 
     Route::resource('/tabel-usulan', UsulanPenyusul::class);
+
+    Route::resource('/profile', Profile::class);
     // Route::get('/tabel-usulan', [UsulanPenyusul::class, 'index']);
-    Route::get('/status-usulan', [StatusUsulanController::class, 'index']);
+    Route::resource('/status-usulan', StatusUsulanController::class);
 
     // Route khusus untuk fitur "laporkan data"
+    Route::get('tabel-usulan/{id}/laporkan-data/create', [UsulanPenyusul::class, 'create']);
+    Route::post('tabel-usulan/{id}/laporkan-data', [UsulanPenyusul::class, 'store']);
     Route::get('tabel-usulan/{id}/laporkan-data', [UsulanPenyusul::class, 'laporkanData'])->name('usulan.laporkan-data');
     Route::post('tabel-usulan/{id}/laporkan-data', [UsulanPenyusul::class, 'simpanLaporan'])->name('usulan.laporkan-data');
+
+    // Route::resource('tabel-usulan/{id}/laporkan-data', TambahReportController::class);
 
     // Route untuk menampilkan halaman edit
     // Route::get('/tabel-usulan/{id}/edit', [UsulanPenyusul::class, 'edit']);
