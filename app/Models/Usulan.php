@@ -13,6 +13,7 @@ class Usulan extends Model
     protected $primaryKey = 'id_usulan';
     protected $fillable = [
         'no',
+        'usulan_id',
         'tgl_usulan',
         'fraksi',
         'pengusul',
@@ -29,15 +30,15 @@ class Usulan extends Model
         'harga_satuan',
         'nilai_usulan',
         'nilai_akomodir',
-        'keterangan',
-        'kode_barang',
+        // 'keterangan',
+        // 'kode_barang',
         'nama_wilayah'
     ];
 
     // satu data_usulan memiliki banyak report
     public function reports()
     {
-        return $this->hasMany(Report::class, 'id_report');
+        return $this->belongsTo(Report::class, 'id_report');
     }
 
     public function satuans()

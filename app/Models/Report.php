@@ -14,12 +14,12 @@ class Report extends Model
     protected $table = 'report';
     protected $primaryKey = 'id_report';
     protected $fillable = [
-        'realisasi', 'tgl_pelaksanaan', 'keterangan', 'id_usulan'
+        'realisasi', 'tgl_pelaksanaan', 'keterangan', 'id_usulan', 'status', 'waktu_pelaporan', 'alasan_ditolak'
     ];
 
     // banyak report terkait dengan satu data_usulan
     public function dataUsulan()
     {
-        return $this->belongsTo(Usulan::class, 'id_usulan');
+        return $this->hasOne(Usulan::class, 'id_usulan');
     }
 }
