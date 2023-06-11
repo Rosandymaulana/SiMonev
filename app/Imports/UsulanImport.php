@@ -40,6 +40,7 @@ class UsulanImport implements ToModel, WithHeadingRow
 
             return new Usulan([
                 'no' => $row['no'],
+                'usulan_id' => $row['id_usulan'],
                 'tgl_usulan' => $row['tanggal_usul'],
                 'fraksi' => $row['fraksi'],
                 'pengusul' => $row['pengusul'],
