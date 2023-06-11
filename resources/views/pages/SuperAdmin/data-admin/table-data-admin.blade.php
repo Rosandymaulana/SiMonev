@@ -37,15 +37,19 @@
                                     <tbody>
                                         @foreach ($users as $item)
                                         <tr>
-
                                             <td>{{ $item->username }}</td>
-                                            <td>{{ $item->email }}</td>
+                                            <td>
+                                                <a href="{{ url('mailto: '. $item->email) }}" class="text-red-300">{{
+                                                    $item->email }}</a>
+                                            </td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->wilayah->nama_wilayah }}</td>
                                             <td>{{ $item->jabatan }}</td>
-                                            <td>{{ $item->no_telp }}</td>
+                                            <td>
+                                                <a href="{{ url('https://wa.me/+62'. $item->no_telp) }}"
+                                                    class="text-red-300">{{ $item->no_telp }}</a>
+                                            </td>
                                             <td>{{ $item->role->name }}</td>
-                                            {{-- <td>{{ $item->role }}</td> --}}
                                             <td class="d-flex justify-content-evenly px-3">
                                                 <a href="{{ url('/super-admin'.'/'.'admin'.'/'.$item->id_user . '/edit') }}"
                                                     class="edit px-1" data-toggle="toggle">

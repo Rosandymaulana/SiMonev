@@ -11,6 +11,15 @@
     <link href="{{ asset('style/img/favicon.png') }}" rel="apple-touch-icon">
 
     <!-- Custom fonts for this template-->
+    {{--
+    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css"> --}}
+    {{--
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> --}}
+    <!-- Custom fonts for this template-->
     <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -39,7 +48,7 @@
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('style/img/ic-penyusul.png') }}" alt="">
                 </div>
-                <div class="sidebar-brand-text mx-3">Penyusul</div>
+                <div class="sidebar-brand-text mx-3">Pengusul</div>
             </a>
 
             <!-- Divider -->
@@ -84,7 +93,6 @@
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
                 <img class="sidebar-card-illustration mb-2" src="{{ asset('style/img/logo.png') }}" alt="Logo Bappeda">
-                <p class="text-center mb-2"><strong>BAPPEDA MALANG</strong></p>
             </div>
         </ul>
         <!-- End of Sidebar -->

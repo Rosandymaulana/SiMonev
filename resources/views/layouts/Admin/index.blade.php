@@ -34,7 +34,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/admin') }}">
                 <div class="sidebar-brand-icon ">
-                    <img src="{{ asset('style/img/ic-admin.png') }}" alt="">
+                    <img src="{{ asset('style/img/ic-admin.svg') }}" alt="">
                 </div>
                 <div class="sidebar-brand-text mx-3">Admin</div>
             </a>
@@ -64,6 +64,12 @@
                     <span>Tabel Usulan</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/admin/daftar-usulan') }}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Progress Usulan</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -75,7 +81,6 @@
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
                 <img class="sidebar-card-illustration mb-2" src="{{ asset('style/img/logo.png') }}" alt="Logo Bappeda">
-                <p class="text-center mb-2"><strong>BAPPEDA MALANG</strong></p>
             </div>
 
         </ul>

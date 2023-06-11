@@ -17,7 +17,7 @@
                     <div class="col-12">
                         <div class="card top-selling overflow-auto mb-4">
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Tabel Penyusul</h5>
+                                <h5 class="card-title">Tabel Pengusul</h5>
                                 <table class="table table-borderless table-bordered py-3" id="myTable">
                                     <thead>
                                         <tr>
@@ -38,20 +38,48 @@
                                             <td>{{ $item->usulan }}</td>
                                             <td>{{ $item->kelurahan }}</td>
                                             <td>{{ $item->opd_tujuan_akhir }}</td>
+                                            <td></td>
                                             <td>
-                                                @if ($latestReports && $latestReports->id_usulan == $item->id_usulan)
-                                                {{-- Tampilkan informasi dari $latestReports --}}
-                                                {{ $latestReports->realisasi }}
-                                                @endif
-                                            </td>
-                                            <td class="d-flex justify-content-evenly px-3">
-                                                <a href="{{ url('penyusul/'. 'tabel-usulan/' .$item->id_usulan. '/laporkan-data') }}"
+                                                <a href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
                                                     class="edit px-1" data-toggle="toggle">
-                                                    <button type="button" class="btn btn-sm btn-success">
+                                                    <button type="button" class="btn btn-sm btn-warning">
                                                         Laporkan Progress
                                                     </button>
                                                 </a>
                                             </td>
+                                            {{-- <td>{{ $item->realisasi }}</td>
+                                            <td class="d-flex justify-content-evenly px-3">
+                                                @if ($item->realisasi == 0)
+                                                <a href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
+                                                    class="edit px-1" data-toggle="toggle">
+                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                        Laporkan Progress
+                                                    </button>
+                                                </a>
+                                                @elseif ($item->realisasi >= 1 && $item->realisasi <= 99) <a
+                                                    href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
+                                                    class="edit px-1" data-toggle="toggle">
+                                                    <button type="button" class="btn btn-sm btn-warning">
+                                                        Laporkan Progress
+                                                    </button>
+                                                    </a>
+                                                    @elseif ($item->realisasi == 100 && ($item->status == 'submit' ||
+                                                    $item->status == 'pending'))
+                                                    <a href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
+                                                        class="edit px-1" data-toggle="toggle">
+                                                        <button type="button" class="btn btn-sm btn-primary">
+                                                            Dalam Persetujuan
+                                                        </button>
+                                                    </a>
+                                                    @elseif ($item->realisasi == 100)
+                                                    <a href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
+                                                        class="edit px-1" data-toggle="toggle">
+                                                        <button type="button" class="btn btn-sm btn-success">
+                                                            Telah Selesai
+                                                        </button>
+                                                    </a>
+                                                    @endif
+                                            </td> --}}
                                         </tr>
                                         @endforeach
                                     </tbody>

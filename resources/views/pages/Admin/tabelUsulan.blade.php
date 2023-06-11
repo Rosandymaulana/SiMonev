@@ -72,22 +72,24 @@
                                     <tr>
                                         <th scope="col">ID Usulan</th>
                                         <th scope="col">NO</th>
-                                        <th scope="col">Tgl Usulan</th>
-                                        <th scope="col">Fraksi</th>
-                                        <th scope="col">Pengusul</th>
+                                        {{-- <th scope="col">Tgl Usulan</th> --}}
+                                        {{-- <th scope="col">Fraksi</th> --}}
+                                        {{-- <th scope="col">Pengusul</th> --}}
                                         <th scope="col">Usulan</th>
-                                        <th scope="col">Masalah</th>
-                                        <th scope="col">Prioritas Usulan</th>
-                                        <th scope="col">Alamat</th>
+                                        {{-- <th scope="col">Masalah</th> --}}
+                                        {{-- <th scope="col">Prioritas Usulan</th> --}}
+                                        {{-- <th scope="col">Alamat</th> --}}
                                         <th scope="col">Kelurahan</th>
-                                        <th scope="col">opd_tujuan_awal</th>
+                                        {{-- <th scope="col">opd_tujuan_awal</th> --}}
                                         <th scope="col">opd_tujuan_akhir</th>
-                                        <th scope="col">Status</th>
+                                        {{-- <th scope="col">Status</th>
                                         <th scope="col">Volume</th>
                                         <th scope="col">Satuan</th>
                                         <th scope="col">Harga Satuan</th>
                                         <th scope="col">Nilai Usulan</th>
-                                        <th scope="col">Nilai Akomodir</th>
+                                        <th scope="col">Nilai Akomodir</th> --}}
+                                        <th scope="col">Realisasi</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,22 +97,34 @@
                                     <tr>
                                         <td>{{ $item->id_usulan }}</td>
                                         <td>{{ $item->no }}</td>
-                                        <td>{{ $item->tgl_usulan }}</td>
-                                        <td>{{ $item->fraksi }}</td>
-                                        <td>{{ $item->pengusul }}</td>
+                                        {{-- <td>{{ $item->tgl_usulan }}</td> --}}
+                                        {{-- <td>{{ $item->fraksi }}</td> --}}
+                                        {{-- <td>{{ $item->pengusul }}</td> --}}
                                         <td>{{ $item->usulan }}</td>
-                                        <td>{{ $item->masalah }}</td>
-                                        <td>{{ $item->prioritas_usulan }}</td>
-                                        <td>{{ $item->alamat }}</td>
+                                        {{-- <td>{{ $item->masalah }}</td> --}}
+                                        {{-- <td>{{ $item->prioritas_usulan }}</td> --}}
+                                        {{-- <td>{{ $item->alamat }}</td> --}}
                                         <td>{{ $item->kelurahan }}</td>
-                                        <td>{{ $item->opd_tujuan_awal }}</td>
+                                        {{-- <td>{{ $item->opd_tujuan_awal }}</td> --}}
                                         <td>{{ $item->opd_tujuan_akhir }}</td>
-                                        <td>{{ $item->status }}</td>
-                                        <td>{{ $item->volume }}</td>
-                                        <td>{{ $item->id_satuan }}</td>
-                                        <td>{{ $item->harga_satuan }}</td>
-                                        <td>{{ $item->nilai_usulan }}</td>
-                                        <td>{{ $item->nilai_akomodir }}</td>
+                                        <td></td>
+                                        <td class="d-flex justify-content-evenly px-3">
+                                            {{-- <a href="{{ url('admin/'. 'tabel-usulan/' .$item->id_usulan) }}"
+                                                class="edit px-1" data-toggle="toggle">
+                                                <img src="{{ asset('style/img/ic-edit.svg') }}" alt="">
+                                            </a> --}}
+                                            <a href="{{ url('admin/'. 'tabel-usulan/' .$item->id_usulan. '/edit') }}"
+                                                class="edit px-1" data-toggle="toggle">
+                                                <img src="{{ asset('style/img/ic-eye.svg') }}" alt="">
+                                            </a>
+                                        </td>
+
+                                        {{-- <td>{{ $item->status }}</td> --}}
+                                        {{-- <td>{{ $item->volume }}</td> --}}
+                                        {{-- <td>{{ $item->id_satuan }}</td> --}}
+                                        {{-- <td>{{ $item->harga_satuan }}</td> --}}
+                                        {{-- <td>{{ $item->nilai_usulan }}</td> --}}
+                                        {{-- <td>{{ $item->nilai_akomodir }}</td> --}}
                                         {{-- Problem Masih belum bisa menampikan nama satuan dan nama wilayah --}}
                                         {{--
                                         <td>{{ $item['id_usulan'] }}</td>
