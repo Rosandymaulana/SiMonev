@@ -15,15 +15,18 @@
 <body>
     <main id="main" class="main">
 
-
-        <div class="pagetitle">
-            <h1>Tabel Usulan</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Tabel Usulan</li>
-                </ol>
-            </nav>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <div class="">
+                <h1 class="h3 mb-0 fw-bold">{{ 'Tabel Usulan' }}</h1>
+                <div class="d-flex">
+                    <p><a href="{{ url('/admin') }}">Dashboard</a></p>
+                    <p class="ml-1"><a href="{{ url('/admin/tabel-usulan') }}">/ Tabel Usulan</a></p>
+                    <p class="ml-1">/ Edit Usulan</p>
+                    <p class="ml-1 text-warning">/ {{ $usulan->usulan_id }}</p>
+                </div>
+            </div>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Buku Panduan</a>
         </div>
         <!-- End Page Title -->
 
@@ -57,7 +60,7 @@
         <section class="dashboard">
             <div class="row">
                 <div class="col-12">
-                    <div class="card recent-sales overflow-auto">
+                    <div class="card recent-sales overflow-auto mb-4">
                         <div class="card-body">
                             <form class="form-horizontal" action="{{ url('admin/tabel-usulan/' .$usulan->id_usulan ) }}"
                                 method="post" enctype="multipart/form-data">
@@ -68,7 +71,7 @@
                                     <label for="id_usulan" class="col-sm-2 col-form-label">ID Usulan</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="id_usulan" class="form-control" id="id_usulan"
-                                            value="{{ $usulan->id_usulan }}" readonly disabled>
+                                            value="{{ $usulan->usulan_id }}" readonly disabled>
                                     </div>
                                 </div>
 
@@ -118,6 +121,7 @@
                                     <div class="col-sm-10">
                                         <input type="text" name="prioritas_usulan" class="form-control"
                                             id="prioritas_usulan" value="{{ $usulan->prioritas_usulan }}">
+
                                     </div>
                                 </div>
 
@@ -199,6 +203,32 @@
                                     <div class="col-sm-10">
                                         <input type="text" name="nilai_akomodir" class="form-control"
                                             id="nilai_akomodir" value="{{ $usulan->nilai_akomodir }}" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="realisasi" class="col-sm-2 col-form-label">Realisasi</label>
+                                    <div class="col-sm-10">
+                                        @if($latestReports)
+                                        <input type="text" name="realisasi" class="form-control" id="realisasi"
+                                            value="{{ $latestReports->realisasi }}" readonly />
+                                        @else
+                                        <input type="number" name="realisasi" id="realisasi" class="form-control"
+                                            value="{{ 0 }}" readonly disabled>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
+                                    <div class="col-sm-10">
+                                        @if ($latestReports)
+                                        <input type="text" name="keterangan" id="keterangan" class="form-control"
+                                            value="{{ $latestReports->keterangan }}" readonly disabled>
+                                        @else
+                                        <input type="text" name="keterangan" id="keterangan" class="form-control"
+                                            value="{{ 'Belum Ada' }}" readonly disabled>
+                                        @endif
                                     </div>
                                 </div>
 

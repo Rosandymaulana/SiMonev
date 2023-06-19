@@ -16,15 +16,18 @@
 
 
         <div class="pagetitle">
-            <h1>Tambah Penyusul</h1>
-            <nav>
-                {{-- <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/tabel_usulan') }}">Tabel Usulan</a></li>
-                    <li class="breadcrumb-item active">Edit</li>
-                    <li class="breadcrumb-item">{{ $usulanPenyusul->id_usulan }}</li>
-                </ol> --}}
-            </nav>
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="">
+                    <h1 class="h3 fw-bold">{{ 'Tambah Pengusul' }}</h1>
+                    <div class="d-flex">
+                        <p><a href="{{ url('/super-admin') }}">Dashboard</a></p>
+                        <p class="ml-1">/</p>
+                        <p class="ml-1"><a href="{{ url('/super-admin/penyusul') }}">Data Pengusul</a></p>
+                        <p class="ml-1">/</p>
+                        <p class="ml-1">Tambah Data</p>
+                    </div>
+                </div>
+            </div>
         </div><!-- End Page Title -->
 
         <section class="dashboard">

@@ -21,12 +21,31 @@ class UsulanPenyusul extends Controller
         $wilayahUser = auth()->user()->wilayah->nama_wilayah;
 
         // Mengambil data dari tabel usulan sesuai wilayah
+        // $usulanPenyusul = DB::table('usulan')
+        //     ->join('wilayah', 'usulan.kelurahan', '=', 'wilayah.id_wilayah')
+        //     ->where('wilayah.nama_wilayah', $wilayahUser)
+        //     ->limit(100)
+        //     ->get();
+
+        // Paten Terbaru
         $usulanPenyusul = DB::table('usulan')
-            ->join('wilayah', 'usulan.kelurahan', '=', 'wilayah.id_wilayah')
+            ->join(
+                'wilayah',
+                'usulan.kelurahan',
+                '=',
+                'wilayah.id_wilayah'
+            )
+            ->leftJoin('report', function ($join) {
+                $join->on('report.id_usulan', '=', 'usulan.id_usulan')
+                    ->where('report.status', '=', 'approved')
+                    ->whereRaw('report.updated_at = (SELECT MAX(updated_at) FROM report WHERE id_usulan = usulan.id_usulan AND status = "approved")');
+            })
             ->where('wilayah.nama_wilayah', $wilayahUser)
-            ->limit(100)
+            ->select('usulan.*', 'report.realisasi')
+            ->orderBy('usulan.no', 'asc')
             ->get();
 
+        // Paten
         // $usulanPenyusul = DB::table('usulan')
         //     ->join(
         //         'wilayah',
@@ -41,7 +60,6 @@ class UsulanPenyusul extends Controller
         //                 '=',
         //                 'approved'
         //             )
-        //             // ->whereIn('report.status', ['approved'])
         //             ->whereRaw('report.updated_at = (SELECT MAX(updated_at) FROM report WHERE id_usulan = usulan.id_usulan)');
         //     })
         //     ->where('wilayah.nama_wilayah', $wilayahUser)
@@ -73,14 +91,16 @@ class UsulanPenyusul extends Controller
             ->where('id_usulan', $selectedID)
             ->max('updated_at');
 
+        // Paten Jangan Dirubah
         $latestReports = DB::table('report')
             ->join('usulan', 'report.id_usulan', '=', 'usulan.id_usulan')
             ->where('report.id_usulan', $selectedID)
             ->where('report.status', 'approved')
-            ->whereIn('report.updated_at', function ($query) use ($selectedID) {
+            ->where('report.updated_at', function ($query) use ($selectedID) {
                 $query->select(DB::raw('MAX(updated_at)'))
                     ->from('report')
-                    ->where('id_usulan', $selectedID);
+                    ->where('id_usulan', $selectedID)
+                    ->where('status', 'approved');
             })
             ->select('report.*')
             ->latest('report.updated_at')
@@ -97,7 +117,7 @@ class UsulanPenyusul extends Controller
         //     ->first();
 
 
-        // Paten
+
         // $latestReports = DB::table('report')
         //     ->join('usulan', 'report.id_usulan', '=', 'usulan.id_usulan')
         //     ->select('report.*')

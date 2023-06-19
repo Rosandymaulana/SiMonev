@@ -67,7 +67,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/admin/daftar-usulan') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Progress Usulan</span></a>
+                    <span>Status Usulan</span></a>
             </li>
 
             <!-- Divider -->
@@ -81,6 +81,7 @@
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
                 <img class="sidebar-card-illustration mb-2" src="{{ asset('style/img/logo.png') }}" alt="Logo Bappeda">
+                <p class="text-center text-white">Bappeda Malang</p>
             </div>
 
         </ul>

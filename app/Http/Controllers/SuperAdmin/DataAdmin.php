@@ -61,7 +61,7 @@ class DataAdmin extends Controller
             'username' => $request->get('username'),
             'id_role' => "2", // Diisi 2 karena relasi pada Tabel Role, 2 untuk Admin
             'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
+            'password' => bcrypt($request->get('password')),
             'name' => $request->get('name'),
             'jabatan' => $request->get('jabatan'),
             'no_telp' => $request->get('no_telp'),
@@ -90,6 +90,7 @@ class DataAdmin extends Controller
         // $wilayah = Wilayah::whereNotIn('id_wilayah', [1])->get();
         // $wilayah = Role::find(1);
         $wilayah = Wilayah::where('id_wilayah', 1)->get();
+        // dd($user->no_telp);
 
         return view('pages.superadmin.data-admin.edit-admin', [
             'role' => $role,
@@ -109,7 +110,7 @@ class DataAdmin extends Controller
         $data->username = $request->get('username');
         $data->id_role = $admin;
         $data->email = $request->get('email');
-        $data->password = $request->get('password');
+        $data->password = bcrypt($request->get('password'));
         $data->name = $request->get('name');
         $data->jabatan = $request->get('jabatan');
         $data->no_telp = $request->get('no_telp');

@@ -45,15 +45,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label for="role" class="col-sm-2 col-form-label">Role</label>
-                                    <div class="col-sm-10">
-                                        @foreach($role as $data)
-                                        <input type="text" name="role" class="form-control" id="role"
-                                            value="{{ $data->name }}" readonly disabled>
-                                        @endforeach
-                                    </div>
-                                </div>
 
                                 {{-- <div class="row mb-3">
                                     <label for="role" class="col-sm-2 col-form-label">Role</label>
@@ -92,22 +83,6 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="jabatan" class="form-control" id="jabatan"
-                                            value="{{ $user->jabatan }}">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label for="no_telp" class="col-sm-2 col-form-label">No Telp</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" name="no_telp" class="form-control" id="no_telp"
-                                            value="{{ $user->no_telp }}">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
                                     <label for="wilayah" class="col-sm-2 col-form-label">Wilayah</label>
                                     <div class="col-sm-10">
                                         <select name="wilayah" class="form-control" id="wilayah">
@@ -120,6 +95,32 @@
                                             {{ $errors->first('wilayah')}}
                                         </div>
                                         @endif
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="jabatan" class="form-control" id="jabatan"
+                                            value="{{ $user->jabatan }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="no_telp" class="col-sm-2 col-form-label">No Telp</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="no_telp" class="form-control" id="no_telp"
+                                            value="{{ $user->no_telp }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="role" class="col-sm-2 col-form-label">Role</label>
+                                    <div class="col-sm-10">
+                                        @foreach($role as $data)
+                                        <input type="text" name="role" class="form-control" id="role"
+                                            value="{{ $data->name }}" readonly disabled>
+                                        @endforeach
                                     </div>
                                 </div>
 

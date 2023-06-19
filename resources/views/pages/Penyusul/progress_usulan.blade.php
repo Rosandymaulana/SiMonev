@@ -26,41 +26,41 @@
                                             <th scope="col">Usulan</th>
                                             <th scope="col">Kelurahan</th>
                                             <th scope="col">opd_tujuan_akhir</th>
-                                            <th scope="col">Realisasi</th>
+                                            <th scope="col">Realisasi %</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($usulanPenyusul as $item)
                                         <tr>
-                                            <td>{{ $item->id_usulan }}</td>
+                                            <td>{{ $item->usulan_id }}</td>
                                             <td>{{ $item->no }}</td>
                                             <td>{{ $item->usulan }}</td>
                                             <td>{{ $item->kelurahan }}</td>
                                             <td>{{ $item->opd_tujuan_akhir }}</td>
-                                            <td></td>
-                                            <td>
+                                            {{-- <td></td> --}}
+                                            {{-- <td>
                                                 <a href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
                                                     class="edit px-1" data-toggle="toggle">
                                                     <button type="button" class="btn btn-sm btn-warning">
                                                         Laporkan Progress
                                                     </button>
                                                 </a>
-                                            </td>
-                                            {{-- <td>{{ $item->realisasi }}</td>
+                                            </td> --}}
+                                            <td>{{ $item->realisasi }}</td>
                                             <td class="d-flex justify-content-evenly px-3">
                                                 @if ($item->realisasi == 0)
                                                 <a href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
                                                     class="edit px-1" data-toggle="toggle">
                                                     <button type="button" class="btn btn-sm btn-danger">
-                                                        Laporkan Progress
+                                                        Belum Dimulai
                                                     </button>
                                                 </a>
                                                 @elseif ($item->realisasi >= 1 && $item->realisasi <= 99) <a
                                                     href="{{ url('penyusul/tabel-usulan/' . $item->id_usulan . '/laporkan-data') }}"
                                                     class="edit px-1" data-toggle="toggle">
                                                     <button type="button" class="btn btn-sm btn-warning">
-                                                        Laporkan Progress
+                                                        Sedang Berjalan
                                                     </button>
                                                     </a>
                                                     @elseif ($item->realisasi == 100 && ($item->status == 'submit' ||
@@ -79,7 +79,7 @@
                                                         </button>
                                                     </a>
                                                     @endif
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

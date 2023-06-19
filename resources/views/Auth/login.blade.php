@@ -1,11 +1,13 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    <h1>Selamat Datang</h1>
+    <div class="d-lg-flex">
+        <img class="mx-auto" src="{{ asset('style/img/logo.png') }}" alt="Logo Bappeda"
+            style="width: 3.798rem; height: 3.95rem;">
+        <p class="text-center mt-4">Si Monev</p>
+    </div>
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
-
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -41,9 +43,10 @@
         </a>
         @endif
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button class="ml-3">
+            <x-primary-button class="ml-3 btn-block">
                 {{ __('Log in') }}
             </x-primary-button>
+            {{-- <button type="button" class="btn btn-primary btn-block mb-4">Log in</button> --}}
         </div>
     </form>
 </x-guest-layout>

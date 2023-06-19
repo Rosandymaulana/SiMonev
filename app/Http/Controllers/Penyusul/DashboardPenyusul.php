@@ -19,14 +19,18 @@ class DashboardPenyusul extends Controller
             ->count();
         // ->get();
 
+        // Masih Belum
         $dlmProgress = DB::table('report')
             ->whereBetween('realisasi', [1, 99])
             ->where('status', 'approved')
+            ->distinct()
             ->count();
 
+        // Masih Belum yg dihitung harusnya hanya dari wilayah user
         $jumlahSelesai = DB::table('report')
             ->where('realisasi', 100)
             ->where('status', 'approved')
+            // ->where('wilayah', $wilayahUser)
             ->count();
 
         return view('pages.penyusul.dashboard', compact('jmlhUsulanPerWilayah', 'dlmProgress', 'jumlahSelesai'));

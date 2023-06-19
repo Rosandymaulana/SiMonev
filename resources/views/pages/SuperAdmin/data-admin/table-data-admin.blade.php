@@ -17,7 +17,15 @@
                     <div class="col-12">
                         <div class="card top-selling overflow-auto">
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Tabel Admin</h5>
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <div class="">
+                                        <h1 class="h3 mb-0 fw-bold">{{ 'Data Admin' }}</h1>
+                                        <div class="d-flex">
+                                            <p><a href="{{ url('/super-admin') }}">Dashboard</a></p>
+                                            <p class="ml-1">/ Data Admin</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <a href="{{ url('/super-admin/admin/create') }}">
                                     <button class="btn btn-success mb-4">Tambah Admin</button>
                                 </a>
@@ -53,18 +61,24 @@
                                             <td class="d-flex justify-content-evenly px-3">
                                                 <a href="{{ url('/super-admin'.'/'.'admin'.'/'.$item->id_user . '/edit') }}"
                                                     class="edit px-1" data-toggle="toggle">
-                                                    <button type="button" class="btn btn-sm btn-success">
+                                                    <img class="mx-1"
+                                                        src="{{ asset('style/img/super-admin/ic-edit.svg') }}" alt="">
+                                                    {{-- <button type="button" class="btn btn-sm btn-success">
                                                         edit
-                                                    </button>
+                                                    </button> --}}
                                                 </a>
                                                 <form action="{{ url('super-admin'.'/'.'admin'.'/'.$item->id_user) }}"
                                                     method="post">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
-                                                    <button onclick="return confirm('Confirm Delete')" type="submit"
-                                                        class="btn btn-sm btn-danger btndelete">
+                                                    <img class="mx-1"
+                                                        src="{{ asset('style/img/super-admin/ic-delete.svg') }}" alt=""
+                                                        style="cursor: pointer;"
+                                                        onclick="return confirm('Confirm Delete')">
+                                                    {{-- <button onclick="return confirm('Confirm Delete')"
+                                                        type="submit" class="btn btn-sm btn-danger btndelete">
                                                         delete
-                                                    </button>
+                                                    </button> --}}
                                                 </form>
                                             </td>
                                         </tr>

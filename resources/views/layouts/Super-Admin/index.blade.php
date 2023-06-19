@@ -58,21 +58,22 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                DATA INFORMATION
             </div>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/super-admin/admin') }}">
-                    <i class="fas fa-fw fa-table"></i>
+                    {{-- <i class="fas fa-fw fa-table"></i> --}}
+                    <img src="{{ asset('style/img/super-admin/ic-admin.svg') }}" alt="">
                     <span>Data Admin</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/super-admin/penyusul') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Data Penyusul</span></a>
+                    <img src="{{ asset('style/img/super-admin/ic-pengusul.svg') }}" alt="">
+                    <span>Data Pengusul</span></a>
             </li>
 
             <!-- Divider -->

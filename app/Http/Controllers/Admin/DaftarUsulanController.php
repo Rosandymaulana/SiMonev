@@ -12,10 +12,18 @@ class DaftarUsulanController extends Controller
 {
     public function index()
     {
+        // $wilayahUser = auth()->user()->wilayah->nama_wilayah;
         $reports = DB::table('report')
-            ->where('status', 'submitted')
-            ->orderBy('created_at', 'desc')
-            ->limit(100)
+            ->join('usulan', 'report.id_usulan', '=', 'usulan.id_usulan')
+            ->join('wilayah', 'usulan.kelurahan', '=', 'wilayah.id_wilayah')
+            ->select('report.*', 'usulan.*', 'wilayah.*')
+            ->where('report.status', 'submitted')
+            ->whereIn('report.created_at', function ($query) {
+                $query->select(DB::raw('MAX(created_at)'))
+                    ->from('report')
+                    ->groupBy('id_usulan');
+            })
+            ->orderBy('report.created_at', 'asc')
             ->get();
 
         return view('pages.admin.progress-usulan', compact('reports'));
@@ -40,4 +48,6 @@ class DaftarUsulanController extends Controller
     //     return redirect('admin/daftar-usulan');
     //     // Redirect or return a response
     // }
+
+
 }

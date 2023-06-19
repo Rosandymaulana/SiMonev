@@ -36,12 +36,12 @@ use App\Http\Controllers\Penyusul\TambahReportController;
 //     Route::get('/settings', 'AdminController@settings');
 // });
 
-Route::get('/register', function () {
-    return view('Auth.register');
-});
+// Route::get('/register', function () {
+//     return view('Auth.register');
+// });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Route::get('/loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
@@ -65,7 +65,9 @@ Route::prefix('super-admin')->group(function () {
 Route::prefix('admin')->group(function () {
     // [Dashboard] Menampilkan Informasi Untuk Admin
     Route::get('/', [DashboardController::class, 'index']);
+
     Route::get('/daftar-usulan', [DaftarUsulanController::class, 'index']);
+
     Route::post('/reports/{id}/approve', [DaftarUsulanController::class, 'approveReport'])
         ->name('report.approve');
     Route::post('/reports/{id}/reject', [DaftarUsulanController::class, 'rejectReport'])

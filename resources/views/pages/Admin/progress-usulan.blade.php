@@ -32,29 +32,37 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID Report</th>
+                                    <th scope="col">No</th>
                                     <th scope="col">ID Usulan</th>
+                                    <th scope="col">Usulan</th>
+                                    <th scope="col">OPD Tujuan Akhir</th>
                                     <th scope="col">Realisasi</th>
                                     <th scope="col">Tgl Pelaksanaan</th>
                                     <th scope="col">Keterangan</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Actions</th>
+
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($reports as $item)
                                 <tr>
-                                    <td>{{ $item->id_report }}</td>
-                                    <td>{{ $item->id_usulan }}</td>
+                                    <td>{{ $item->nama_wilayah }}</td>
+                                    <td>{{ $item->no }}</td>
+                                    <td>{{ $item->usulan_id }}</td>
+                                    <td>{{ $item->usulan }}</td>
+                                    <td>{{ $item->opd_tujuan_akhir }}</td>
                                     <td>{{ $item->realisasi }}</td>
                                     <td>{{ $item->tgl_pelaksanaan }}</td>
                                     <td>{{ $item->keterangan }}</td>
-                                    <td>{{ $item->status }}</td>
+
                                     <td class="d-flex justify-content-evenly px-3">
                                         <!-- Tombol untuk menyetujui report -->
                                         <form action="{{ route('report.approve', ['id' => $item->id_report]) }}"
                                             method="POST">
                                             @csrf
-                                            <button type="submit">Setujui</button>
+                                            <button type="submit" class="btn"><img
+                                                    src="{{ asset('style/img/admin/ic-setuju.svg') }}"
+                                                    alt="{{ 'Setuju' }}"></button>
                                         </form>
                                         <!-- Tombol untuk menolak report -->
                                         {{-- <form action="{{ route('report.reject', ['id' => $item->id_report]) }}"

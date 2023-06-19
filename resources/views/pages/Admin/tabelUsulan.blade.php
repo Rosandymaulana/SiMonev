@@ -14,45 +14,16 @@
 
 <body>
     <main id="main" class="main">
-
-
-        <div class="pagetitle">
-            <h1>Tabel Usulan</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Tabel Usulan</li>
-                </ol>
-            </nav>
-        </div>
-        <!-- End Page Title -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
-                        </div>
-                        <form action="{{ url('/admin/importusulan') }}" method="post" enctype="multipart/form-data">
-                            <div class="modal-body">
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <input type="file" name="file" required>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Import</button>
-                            </div>
-                        </form>
-                    </div>
-
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <div class="">
+                <h1 class="h3 mb-0 fw-bold">{{ 'Tabel Usulan' }}</h1>
+                <div class="d-flex">
+                    <p><a href="{{ url('/admin') }}">Dashboard</a></p>
+                    <p class="ml-1">/ Tabel Usulan</p>
                 </div>
             </div>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Buku Panduan</a>
         </div>
 
         <section class="dashboard">
@@ -62,8 +33,8 @@
                         <div class="card-body">
 
                             <div class="mb-4">
-                                <a href="{{ url('/admin/exportusulan') }}" class="btn btn-success">Export</a>
-                                <a href="" class="btn btn-primary" data-bs-toggle="modal"
+                                <a href="{{ url('/admin/exportusulan') }}" class="btn btn-export">Export</a>
+                                <a href="" class="btn btn-import m-1" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Import</a>
                             </div>
 
@@ -95,7 +66,7 @@
                                 <tbody>
                                     @foreach ($usulan as $item)
                                     <tr>
-                                        <td>{{ $item->id_usulan }}</td>
+                                        <td>{{ $item->usulan_id }}</td>
                                         <td>{{ $item->no }}</td>
                                         {{-- <td>{{ $item->tgl_usulan }}</td> --}}
                                         {{-- <td>{{ $item->fraksi }}</td> --}}
@@ -161,7 +132,33 @@
         </section>
 
     </main>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+                    </div>
+                    <form action="{{ url('/admin/importusulan') }}" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <input type="file" name="file" required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Import</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

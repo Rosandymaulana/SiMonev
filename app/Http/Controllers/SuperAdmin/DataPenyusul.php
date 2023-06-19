@@ -67,7 +67,8 @@ class DataPenyusul extends Controller
             'username' => $request->get('username'),
             'id_role' => $penyusul,
             'email' => $request->get('email'),
-            'password' => $request->get('password'),
+            // 'password' => $request->get('password'),
+            'password' => bcrypt($request->get('password')),
             'name' => $request->get('name'),
             'jabatan' => $request->get('jabatan'),
             'no_telp' => $request->get('no_telp'),
@@ -93,9 +94,9 @@ class DataPenyusul extends Controller
         $role = Role::where('id_role', 3)->get();
         $user = User::find($id_user);
         // Tidak menampilkan seluruh wilayah karena id 1 nilainya Internal Bappeda
-        // $wilayah = Wilayah::whereNotIn('id_wilayah', [1])->get();
+        $wilayah = Wilayah::whereNotIn('id_wilayah', [1])->get();
         // $wilayah = Role::find(1);
-        $wilayah = Wilayah::where('id_wilayah', 1)->get();
+        // $wilayah = Wilayah::where('id_wilayah', 1)->get();
 
         return view('pages.superadmin.data-penyusul.edit-penyusul', [
             'role' => $role,
@@ -110,12 +111,12 @@ class DataPenyusul extends Controller
     public function update(Request $request, $id_user)
     {
         $data = User::find($id_user);
-        $admin = "";
+        $penyusul = "3";
 
         $data->username = $request->get('username');
-        $data->id_role = $admin;
+        $data->id_role = $penyusul;
         $data->email = $request->get('email');
-        $data->password = $request->get('password');
+        $data->password = bcrypt($request->get('password'));
         $data->name = $request->get('name');
         $data->jabatan = $request->get('jabatan');
         $data->no_telp = $request->get('no_telp');

@@ -34,6 +34,10 @@ class DashboardController extends Controller
             ->orWhereNull('nilai_usulan')
             ->orWhereNull('nilai_akomodir')
             ->get();
+        $jumlahSelesai = DB::table('report')
+            ->where('realisasi', 100)
+            ->where('status', 'approved')
+            ->count();
 
         $jmlUsulan = Usulan::count();
 
@@ -49,6 +53,7 @@ class DashboardController extends Controller
 
         return view('pages.Admin.dashboard', [
             'jmlUsulan' => $jmlUsulan,
+            'jumlahSelesai' => $jumlahSelesai
             // 'result' => $result,
             // 'jmlProyekBlmDimulai' => $jmlProyekBlmDimulai,
             // 'jmlProyekSelesai' => $jmlProyekSelesai,

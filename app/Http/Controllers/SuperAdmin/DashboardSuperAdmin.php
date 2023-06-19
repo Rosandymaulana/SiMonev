@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Penyusul;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,8 +18,8 @@ class DashboardSuperAdmin extends Controller
      */
     public function index()
     {
-        // $jmlPenyusul = Penyusul::count();
-        // $jmlAdmin = Admin::count();
+        $jmlAdmin = User::whereIn('id_role', [2])->count();
+        $jmlPenyusul = User::whereIn('id_role', [3])->count();
 
         // $wilayahCounts = Penyusul::join('wilayah', 'penyusul.id_wilayah', '=', 'wilayah.id_wilayah')
         //     ->select('wilayah.nama_wilayah', DB::raw('COUNT(penyusul.id_penyusul) as jumlah_penyusul'))
@@ -37,8 +38,8 @@ class DashboardSuperAdmin extends Controller
         // // return view('chart.index', compact('labels', 'data'));
 
         return view('pages.SuperAdmin.dashboard', [
-            // 'jmlPenyusul' => $jmlPenyusul,
-            // 'jmlAdmin' => $jmlAdmin,
+            'jmlPenyusul' => $jmlPenyusul,
+            'jmlAdmin' => $jmlAdmin,
             // '$labels' => $labels
         ]);
     }

@@ -19,7 +19,7 @@ class UsulanController extends Controller
     public function index()
     {
         $usulan = DB::table('usulan')
-            ->limit(100)
+            // ->limit(100)
             ->get();
 
         // $usulan = Usulan::all();
@@ -115,9 +115,33 @@ class UsulanController extends Controller
     public function edit(string $id)
     {
         $usulan = Usulan::find($id);
-        return view('pages.admin.detail-data', [
-            'usulan' => $usulan
-        ]);
+
+        $selectedID = $usulan->id_usulan;
+
+        $latestDate = DB::table('report')
+            ->where('id_usulan', $selectedID)
+            ->max('updated_at');
+
+        // Paten Jangan Dirubah
+        $latestReports = DB::table('report')
+            ->join('usulan', 'report.id_usulan', '=', 'usulan.id_usulan')
+            ->where('report.id_usulan', $selectedID)
+            ->where('report.status', 'approved')
+            ->where('report.updated_at', function ($query) use ($selectedID) {
+                $query->select(DB::raw('MAX(updated_at)'))
+                    ->from('report')
+                    ->where('id_usulan', $selectedID)
+                    ->where('status', 'approved');
+            })
+            ->select('report.*')
+            ->latest('report.updated_at')
+            ->first();
+
+        // return view('pages.admin.detail-data', [
+        //     'usulan' => $usulan
+        // ]);
+
+        return view('pages.admin.detail-data', compact('usulan', 'latestReports'));
     }
 
     /**

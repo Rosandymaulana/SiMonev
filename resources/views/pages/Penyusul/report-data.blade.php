@@ -1,7 +1,7 @@
 @extends('layouts.pengusul.index')
 @section('penyusul')
 
-<div class="card">
+<div class="card mb-5">
     <div class="card-header">Laporkan Data</div>
     <div class="card-body">
         {{-- <input type="hidden" name="usulan_id" value="{{ $id_usulan }}"> --}}
@@ -24,7 +24,7 @@
                                 <label for="id_usulan" class="col-sm-2 col-form-label">ID Usulan</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="id_usulan" class="form-control" id="id_usulan"
-                                        value="{{ $usulan->id_usulan }}" readonly disabled>
+                                        value="{{ $usulan->usulan_id }}" readonly disabled>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -185,54 +185,85 @@
 
                             </div>
                         </div>
-                        <table class="table table-borderless">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th scope="col">ID Report</th>
-                                    <th scope="col">ID Usulan</th>
-                                    <th scope="col">Waktu Pelaporan</th>
-                                    <th scope="col">Realisasi</th>
-                                    <th scope="col">Tgl Pelaksanaan</th>
-                                    <th scope="col">Keterangan</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($dataReports as $item)
-                                <tr>
-                                    <td>{{ $item->id_report }}</td>
-                                    <td>{{ $item->id_usulan }}</td>
-                                    <td>{{ $item->waktu_pelaporan }}</td>
-                                    <td>{{ $item->realisasi }}</td>
-                                    <td>{{ $item->tgl_pelaksanaan }}</td>
-                                    <td>{{ $item->keterangan }}</td>
-                                    <td class="d-flex justify-content-evenly px-3">
-                                        @if ($item->status == 'pending')
-                                        <button type="button" class="btn" data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit">
-                                            <img src="{{ asset('style/img/ic-edit.svg') }}" alt="">
-                                        </button>
-                                        <form action="{{ url('penyusul/'. 'status-usulan/' .$item->id_report) }}"
-                                            method="post">
-                                            {{ method_field('DELETE') }}
-                                            {{ csrf_field() }}
-                                            <button onclick="return confirm('Confirm Delete')" type="button">
-                                                <img src="{{ asset('style/img/ic-edit.svg') }}" alt="">
-                                            </button>
-                                        </form>
-                                        @elseif($item->status == 'approved')
-                                        <span>Telah Disetujui</span>
-                                        @else
-                                        <span class="text-muted">Pending</span>
-                                        @endif
+                        <div class="card top-selling overflow-auto mb-4">
+                            <div class="card-body pb-0">
+                                <table class="table table-borderless" id="myTable">
+                                    <thead class="table-dark" style="background: #4E73DF;">
+                                        <tr>
+                                            {{-- <th scope="col">ID Report</th>
+                                            <th scope="col">ID Usulan</th> --}}
+                                            <th scope="col">Waktu Pelaporan</th>
+                                            <th scope="col">Realisasi</th>
+                                            <th scope="col">Tgl Pelaksanaan</th>
+                                            <th scope="col">Keterangan</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($dataReports as $item)
+                                        <tr>
+                                            {{-- <td>{{ $item->id_report }}</td>
+                                            <td>{{ $item->id_usulan }}</td> --}}
+                                            <td>{{ $item->waktu_pelaporan }}</td>
+                                            <td>{{ $item->realisasi }}</td>
+                                            <td>{{ $item->tgl_pelaksanaan }}</td>
+                                            <td>{{ $item->keterangan }}</td>
+                                            {{-- <td class="d-flex justify-content-evenly px-3">
+                                                @if ($item->status == 'pending')
+                                                <button type="button" class="btn" data-bs-toggle="modal"
+                                                    data-bs-target="#modalEdit">
+                                                    <img src="{{ asset('style/img/pengusul/ic-edit.svg') }}" alt="">
+                                                </button>
+                                                <form
+                                                    action="{{ url('penyusul/'. 'status-usulan/' .$item->id_report) }}"
+                                                    method="post">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button onclick="return confirm('Confirm Delete')" type="button">
+                                                        <img src="{{ asset('style/img/pengusul/ic-delete.svg') }}"
+                                                            alt="">
+                                                    </button>
+                                                </form>
+                                                @elseif($item->status == 'approved')
+                                                <span>Telah Disetujui</span>
+                                                @else
+                                                <span class="text-muted">Pending</span>
+                                                @endif
+                                            </td> --}}
+                                            <td class="d-flex justify-content-center">
+                                                @if ($item->status == 'pending')
+                                                <img class="mx-1" src="{{ asset('style/img/pengusul/ic-edit.svg') }}"
+                                                    alt="" data-bs-toggle="modal" data-bs-target="#modalEdit"
+                                                    style="cursor: pointer;">
+                                                <form
+                                                    action="{{ url('penyusul/'. 'status-usulan/' .$item->id_report) }}"
+                                                    method="post" class="m-0">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <img class="mx-1"
+                                                        src="{{ asset('style/img/pengusul/ic-delete.svg') }}" alt=""
+                                                        style="cursor: pointer;"
+                                                        onclick="return confirm('Confirm Delete')">
+                                                </form>
+                                                @elseif($item->status == 'approved')
+                                                {{-- <span>Telah Disetujui</span> --}}
+                                                <button type="button" class="btn btn-primary"
+                                                    style="background: #0D6EFD;" disabled>
+                                                    Telah Disetujui
+                                                </button>
+                                                @else
+                                                <button class="btn text-white" style="background: #54557A;" disabled>
+                                                    Pending
+                                                </button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
 
-
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -255,7 +286,7 @@
                 <div class="modal-body">
                     <div class="dropdown">
                         <label for="waktu_pelaporan" class="">Waktu Pelaporan</label>
-                        <select name="waktu_pelaporan" class="form-control" id="waktu_pelaporan">
+                        <select name="waktu_pelaporan" class="form-control" id="waktu_pelaporan" required>
                             <option value="" disabled selected>Pilih Triwulan</option>
                             <option value="Triwulan 1">Triwulan 1</option>
                             <option value="Triwulan 2">Triwulan 2</option>
@@ -265,13 +296,13 @@
                     </div>
 
                     <label for="realisasi" class="">Realisasi</label>
-                    <input type="number" name="realisasi" id="realisasi" class="form-control" max="100">
+                    <input type="number" name="realisasi" id="realisasi" class="form-control" max="100" required>
 
                     <label for="tgl_pelaksanaan" class="">Tgl_Pelaksanaan</label>
-                    <input type="date" name="tgl_pelaksanaan" id="tgl_pelaksanaan" class="form-control">
+                    <input type="date" name="tgl_pelaksanaan" id="tgl_pelaksanaan" class="form-control" required>
 
                     <label for="keterangan" class="">Keterangan</label>
-                    <input type="text" name="keterangan" id="keterangan" class="form-control">
+                    <input type="text" name="keterangan" id="keterangan" class="form-control" required>
 
                 </div>
                 <div class="modal-footer">
@@ -299,7 +330,7 @@
                 <div class="modal-body">
                     <div class="dropdown">
                         <label for="waktu_pelaporan" class="">Waktu Pelaporan</label>
-                        <select name="waktu_pelaporan" class="form-control" id="waktu_pelaporan">
+                        <select name="waktu_pelaporan" class="form-control" id="waktu_pelaporan" required>
                             <option value="" disabled selected>Pilih Triwulan</option>
                             <option value="Triwulan 1">Triwulan 1</option>
                             <option value="Triwulan 2">Triwulan 2</option>
@@ -312,7 +343,7 @@
                         @if ($latestReports)
                         <label for="realisasi" class="">Realisasi</label>
                         <input type="number" name="realisasi" id="realisasi" class="form-control" max="100"
-                            value="{{ $latestReports->realisasi }}">
+                            value="{{ $latestReports->realisasi }}" required>
                         @else
                         <input type="number" name="realisasi" id="realisasi" class="form-control" value="{{ 0 }}"
                             readonly disabled>
@@ -323,7 +354,7 @@
                         @if ($latestReports)
                         <label for="tgl_pelaksanaan" class="">Tgl Pelaksanaan</label>
                         <input type="date" name="tgl_pelaksanaan" id="tgl_pelaksanaan" class="form-control"
-                            value="{{ $latestReports->tgl_pelaksanaan }}">
+                            value="{{ $latestReports->tgl_pelaksanaan }}" required>
                         @else
                         <input type="date" name="tgl_pelaksanaan" id="tgl_pelaksanaan" class="form-control" disabled>
                         @endif
@@ -333,7 +364,7 @@
                         @if ($latestReports)
                         <label for="keterangan" class="">Keterangan</label>
                         <input type="text" name="keterangan" id="keterangan" class="form-control"
-                            value="{{ $latestReports->keterangan }}">
+                            value="{{ $latestReports->keterangan }}" required>
                         @else
                         <input type="text" name="keterangan" id="keterangan" class="form-control"
                             value="{{ 'Masih Belum Ada' }}">

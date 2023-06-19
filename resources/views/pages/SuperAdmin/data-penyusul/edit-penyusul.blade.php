@@ -45,16 +45,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label for="role" class="col-sm-2 col-form-label">Role</label>
-                                    <div class="col-sm-10">
-                                        @foreach($role as $data)
-                                        <input type="text" name="role" class="form-control" id="role"
-                                            value="{{ $data->name }}" readonly disabled>
-                                        @endforeach
-                                    </div>
-                                </div>
-
                                 {{-- <div class="row mb-3">
                                     <label for="role" class="col-sm-2 col-form-label">Role</label>
                                     <div class="col-sm-10">
@@ -92,6 +82,26 @@
                                 </div>
 
                                 <div class="row mb-3">
+                                    <label for="wilayah" class="col-sm-2 col-form-label">Wilayah</label>
+                                    {{-- <input type="text" name="jabatan" class="form-control" id="jabatan"
+                                        value="{{ $user->wilayah->nama_wilayah }}"> --}}
+                                    <div class="col-sm-10">
+                                        <select name="wilayah" class="form-control" id="wilayah">
+                                            @foreach($wilayah as $data)
+                                            {{-- <option value="" selected>{{ $user->wilayah->nama_wilayah }}</option>
+                                            --}}
+                                            <option value="{{ $data->id_wilayah }}">{{ $data->nama_wilayah }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('wilayah'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('wilayah')}}
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
                                     <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="jabatan" class="form-control" id="jabatan"
@@ -108,18 +118,12 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="wilayah" class="col-sm-2 col-form-label">Wilayah</label>
+                                    <label for="role" class="col-sm-2 col-form-label">Role</label>
                                     <div class="col-sm-10">
-                                        <select name="wilayah" class="form-control" id="wilayah">
-                                            @foreach($wilayah as $data)
-                                            <option value="{{ $data->id_wilayah }}">{{ $data->nama_wilayah }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if($errors->has('wilayah'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('wilayah')}}
-                                        </div>
-                                        @endif
+                                        @foreach($role as $data)
+                                        <input type="text" name="role" class="form-control" id="role"
+                                            value="{{ $data->name }}" readonly disabled>
+                                        @endforeach
                                     </div>
                                 </div>
 
