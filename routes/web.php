@@ -52,7 +52,7 @@ Route::get('/', function () {
 
 
 // SUPER ADMIN
-Route::prefix('super-admin')->group(function () {
+Route::prefix('super-admin')->middleware(['auth', 'verified', 'role:1'])->group(function () {
     // [Dashboard] Menampilkan Informasi Untuk SuperAdmin Seputar Hak Akses data Admin dan Penyusul
     Route::get('/', [DashboardSuperAdmin::class, 'index']);
     // [Data Admin] Menampilkan Tabel Admin dan Berhak untuk proses CRUD pada data Admin
@@ -62,7 +62,7 @@ Route::prefix('super-admin')->group(function () {
 });
 
 // ADMIN
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'role:2'])->group(function () {
     // [Dashboard] Menampilkan Informasi Untuk Admin
     Route::get('/', [DashboardController::class, 'index']);
 

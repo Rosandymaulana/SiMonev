@@ -25,38 +25,9 @@ class UsersSeeder extends Seeder
             'id_role' => '1',
             'id_wilayah' => '1',
             'username' => $faker->userName(),
-            'email' => $faker->unique()->safeEmail(),
+            'email' => 'developer@gmail.com',
+            // 'email' => $faker->unique()->safeEmail(),
             'password' => Hash::make('SuperAdmin'),
-            'name' => $faker->name(),
-            'jabatan' => 'Petugas Bappeda',
-            'no_telp' => $faker->phoneNumber(),
-            'created_at' => new DateTime(now()),
-            'updated_at' => new DateTime(now()),
-        ]);
-
-        // Admin 1
-        DB::table('users')->insert([
-            'id_user' => '2',
-            'id_role' => '2',
-            'id_wilayah' => '1',
-            'username' => $faker->userName(),
-            'email' => $faker->unique()->safeEmail(),
-            'password' => Hash::make('Admin1'),
-            'name' => $faker->name(),
-            'jabatan' => 'Petugas Bappeda',
-            'no_telp' => $faker->phoneNumber(),
-            'created_at' => new DateTime(now()),
-            'updated_at' => new DateTime(now()),
-        ]);
-
-        // Admin 2
-        DB::table('users')->insert([
-            'id_user' => '3',
-            'id_role' => '2',
-            'id_wilayah' => '1',
-            'username' => $faker->userName(),
-            'email' => $faker->unique()->safeEmail(),
-            'password' => Hash::make('Admin2'),
             'name' => $faker->name(),
             'jabatan' => 'Petugas Bappeda',
             'no_telp' => $faker->phoneNumber(),
@@ -70,25 +41,10 @@ class UsersSeeder extends Seeder
             'id_role' => '2',
             'id_wilayah' => '1',
             'username' => $faker->userName(),
-            'email' => $faker->unique()->safeEmail(),
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('Admin3'),
             'name' => $faker->name(),
             'jabatan' => 'Petugas Bappeda',
-            'no_telp' => $faker->phoneNumber(),
-            'created_at' => new DateTime(now()),
-            'updated_at' => new DateTime(now()),
-        ]);
-
-        // Penyusul 1
-        DB::table('users')->insert([
-            'id_user' => '5',
-            'id_role' => '3',
-            'id_wilayah' => '27',
-            'username' => $faker->userName(),
-            'email' => $faker->unique()->safeEmail(),
-            'password' => Hash::make('Penyusul2'),
-            'name' => $faker->name(),
-            'jabatan' => 'Kepala Desa',
             'no_telp' => $faker->phoneNumber(),
             'created_at' => new DateTime(now()),
             'updated_at' => new DateTime(now()),
@@ -100,7 +56,7 @@ class UsersSeeder extends Seeder
             'id_role' => '3',
             'id_wilayah' => '34', //Madyopuro
             'username' => $faker->userName(),
-            'email' => $faker->unique()->safeEmail(),
+            'email' => 'pelaksana@gmail.com',
             'password' => Hash::make('Penyusul3'),
             'name' => $faker->name(),
             'jabatan' => 'Sekertaris Desa',

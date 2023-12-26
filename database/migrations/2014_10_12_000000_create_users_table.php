@@ -23,8 +23,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('name', 50);
             $table->string('jabatan', 50);
-            $table->number('no_telp')->nullable();
-            // $table->string('no_telp')->nullable();
+            // $table->number('no_telp')->nullable();
+            $table->string('no_telp')->nullable();
             $table->timestamps();
 
             $table->foreign('id_role')->references('id_role')->on('roles')->onDelete('cascade');

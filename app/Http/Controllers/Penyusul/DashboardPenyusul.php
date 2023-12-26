@@ -33,6 +33,19 @@ class DashboardPenyusul extends Controller
             // ->where('wilayah', $wilayahUser)
             ->count();
 
-        return view('pages.penyusul.dashboard', compact('jmlhUsulanPerWilayah', 'dlmProgress', 'jumlahSelesai'));
+        $blmDimulai = DB::table('usulan')
+            ->leftJoin('report', 'usulan.id_usulan', '=', 'report.id_usulan')
+            ->join('wilayah', 'usulan.kelurahan', '=', 'wilayah.id_wilayah')
+            ->where('wilayah.nama_wilayah', $wilayahUser)
+            ->where(function ($query) {
+                $query->where(function ($subquery) {
+                    $subquery->where('report.realisasi', 0);
+                })->orWhereNull('report.id_report');
+            })
+            ->select('usulan.*')
+            ->distinct()
+            ->count();
+
+        return view('pages.penyusul.dashboard', compact('jmlhUsulanPerWilayah', 'dlmProgress', 'jumlahSelesai', 'blmDimulai'));
     }
 }

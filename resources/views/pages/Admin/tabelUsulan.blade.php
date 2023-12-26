@@ -22,8 +22,7 @@
                     <p class="ml-1">/ Tabel Usulan</p>
                 </div>
             </div>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Buku Panduan</a>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Buku Panduan</a>
         </div>
 
         <section class="dashboard">
@@ -34,8 +33,7 @@
 
                             <div class="mb-4">
                                 <a href="{{ url('/admin/exportusulan') }}" class="btn btn-export">Export</a>
-                                <a href="" class="btn btn-import m-1" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">Import</a>
+                                <a href="" class="btn btn-import m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Import</a>
                             </div>
 
                             <table class="table table-borderless datatable" id="myTable">
@@ -81,11 +79,10 @@
                                         <td></td>
                                         <td class="d-flex justify-content-evenly px-3">
                                             {{-- <a href="{{ url('admin/'. 'tabel-usulan/' .$item->id_usulan) }}"
-                                                class="edit px-1" data-toggle="toggle">
-                                                <img src="{{ asset('style/img/ic-edit.svg') }}" alt="">
+                                            class="edit px-1" data-toggle="toggle">
+                                            <img src="{{ asset('style/img/ic-edit.svg') }}" alt="">
                                             </a> --}}
-                                            <a href="{{ url('admin/'. 'tabel-usulan/' .$item->id_usulan. '/edit') }}"
-                                                class="edit px-1" data-toggle="toggle">
+                                            <a href="{{ url('admin/'. 'tabel-usulan/' .$item->id_usulan. '/edit') }}" class="edit px-1" data-toggle="toggle">
                                                 <img src="{{ asset('style/img/ic-eye.svg') }}" alt="">
                                             </a>
                                         </td>
